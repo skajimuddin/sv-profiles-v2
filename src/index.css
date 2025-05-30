@@ -69,6 +69,18 @@ div.elementor-element.elementor-element-f195b6e.e-flex.e-con-boxed.e-con.e-paren
   background-color: var(--secondary-color);
 }
 
+.elementor-element-b3c8983 {
+  padding: 20px !important;
+}
+
+.elementor-element-b3c8983 img {
+  border-radius: 20px;
+}
+
+.elementor-element-a061d0b {
+  background-color: var(--primary-color) !important;
+}
+
 body {
   overflow-x: hidden;
 }

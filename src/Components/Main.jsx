@@ -64,7 +64,7 @@ const Main = () => {
                           </svg>{" "}
                         </span>
                         <span className="elementor-icon-list-text">
-                          HEALTH &amp; MEDICAL{" "}
+                          METAL FABRICATION &amp; ENGINEERING{" "}
                         </span>
                       </li>
                     </ul>
@@ -80,20 +80,20 @@ const Main = () => {
                     <div className="ekit-wid-con">
                       <div className="ekit-heading elementskit-section-title-wraper text_left   ekit_heading_tablet-text_center   ekit_heading_mobile-">
                         <span className="ekit-heading__shadow-text">
-                          MEDICAL{" "}
+                          SVPROFILES{" "}
                         </span>
                         <h2 className="ekit-heading--title elementskit-section-title ">
-                          Best Caring,{" "}
+                          Shaping metal,{" "}
                           <span>
-                            <span>Better Doctors</span>
+                            <span>Crafting future</span>
                           </span>
                         </h2>
                         <div className="ekit-heading__description">
                           <p>
-                            Dolorem fames quas porta arcu illo. Fuga optio do
-                            sociosqu recusandae fuga curae natoque semper sunt
-                            fusce massa, vero parturient tenetur fugit harum
-                            integer voluptat.
+                            Our commitment is Your satisfaction, fulfill your
+                            requirement by best and value for money product and
+                            services. We at SV PROFILES, we sculpt metal with
+                            surgical precision, leaving no room for error.
                           </p>
                         </div>
                       </div>
@@ -187,7 +187,6 @@ const Main = () => {
                       src="/wp-content/uploads/sites/13/2024/09/portrait-of-young-smiling-doctor-in-the-doctor1-610x1024.png"
                       className="attachment-large size-large wp-image-1054"
                       alt
-                      srcSet="https://demo.xperthemes.com/medzoon/wp-content/uploads/sites/13/2024/09/portrait-of-young-smiling-doctor-in-the-doctor1-610x1024.png 610w, https://demo.xperthemes.com/medzoon/wp-content/uploads/sites/13/2024/09/portrait-of-young-smiling-doctor-in-the-doctor1-179x300.png 179w, https://demo.xperthemes.com/medzoon/wp-content/uploads/sites/13/2024/09/portrait-of-young-smiling-doctor-in-the-doctor1.png 706w"
                       sizes="(max-width: 610px) 100vw, 610px"
                     />
                   </div>
@@ -236,12 +235,12 @@ const Main = () => {
                         <div className="ekit-wid-con">
                           <div className="ekit-heading elementskit-section-title-wraper text_left   ekit_heading_tablet-   ekit_heading_mobile-text_center">
                             <h5 className="ekit-heading--title elementskit-section-title ">
-                              24*7 Emergency Services
+                              Expert Engineering Team
                             </h5>
                             <div className="ekit-heading__description">
                               <p>
-                                Dolorem fames quas porta arcu illo. Fuga optio
-                                soci.
+                                Skilled professionals delivering quality with
+                                precision.
                               </p>
                             </div>
                           </div>
@@ -281,13 +280,10 @@ const Main = () => {
                         <div className="ekit-wid-con">
                           <div className="ekit-heading elementskit-section-title-wraper text_left   ekit_heading_tablet-   ekit_heading_mobile-text_center">
                             <h5 className="ekit-heading--title elementskit-section-title ">
-                              Skilled Medical Professionals
+                              On-Time Delivery
                             </h5>
                             <div className="ekit-heading__description">
-                              <p>
-                                Dolorem fames quas porta arcu illo. Fuga optio
-                                soci.
-                              </p>
+                              <p>Fast, reliable shipping across India.</p>
                             </div>
                           </div>
                         </div>
@@ -336,7 +332,7 @@ const Main = () => {
                           </svg>{" "}
                         </span>
                         <span className="elementor-icon-list-text">
-                          OUR DEPARTMENT
+                          OUR SERVICES
                         </span>
                       </li>
                     </ul>
@@ -352,9 +348,9 @@ const Main = () => {
                     <div className="ekit-wid-con">
                       <div className="ekit-heading elementskit-section-title-wraper text_left   ekit_heading_tablet-text_left   ekit_heading_mobile-text_center">
                         <h3 className="ekit-heading--title elementskit-section-title ">
-                          Extra Ordinary{" "}
+                          Precision Crafting,{" "}
                           <span>
-                            <span>Health Solutions</span>
+                            <span>Practical Innovation</span>
                           </span>
                         </h3>
                       </div>
@@ -375,10 +371,9 @@ const Main = () => {
                 >
                   <div className="elementor-widget-container">
                     <p>
-                      Orci aliquid nisi torquent curabitur, fusce at
-                      voluptatibus, dis, quas nam pellentesque. Varius! Sint,
-                      soluta illo ultricies eros erat nullam. Lobortis metus,
-                      eum ad, lobortis temporibus.
+                      At SV PROFILES, we bring cutting-edge technology and
+                      expert craftsmanship together to deliver high-performance
+                      metal fabrication and agricultural solutions.
                     </p>
                   </div>
                 </div>
@@ -402,7 +397,7 @@ const Main = () => {
                       >
                         <span className="elementor-button-content-wrapper">
                           <span className="elementor-button-text">
-                            MORE DEPARTMENT
+                            KNOW MORE
                           </span>
                         </span>
                       </a>
@@ -447,7 +442,7 @@ const Main = () => {
                   >
                     <div className="elementor-widget-container">
                       <h5 className="elementor-heading-title elementor-size-default">
-                        Orthopedic Care Sector
+                        CNC Gas Cutting
                       </h5>
                     </div>
                   </div>
@@ -474,8 +469,9 @@ const Main = () => {
                 >
                   <div className="elementor-widget-container">
                     <p>
-                      Orci aliquid nisi torquent curabitur, fusce at nam
-                      voluptatibus, dis, quas.
+                      Precision-cut profiles with clean edges and tight
+                      tolerances, suitable for heavy-duty applications across
+                      industries.
                     </p>
                   </div>
                 </div>
@@ -532,7 +528,7 @@ const Main = () => {
                   >
                     <div className="elementor-widget-container">
                       <h5 className="elementor-heading-title elementor-size-default">
-                        Dentistry Department
+                        Plasma Cutting
                       </h5>
                     </div>
                   </div>
@@ -559,8 +555,8 @@ const Main = () => {
                 >
                   <div className="elementor-widget-container">
                     <p>
-                      Orci aliquid nisi torquent curabitur, fusce at nam
-                      voluptatibus, dis, quas.
+                      Fast and efficient cutting of conductive materials like
+                      steel and aluminum, with thickness ranging up to 16mm.
                     </p>
                   </div>
                 </div>
@@ -617,7 +613,7 @@ const Main = () => {
                   >
                     <div className="elementor-widget-container">
                       <h5 className="elementor-heading-title elementor-size-default">
-                        Neurology Department
+                        Industrial Raw Materials
                       </h5>
                     </div>
                   </div>
@@ -644,8 +640,8 @@ const Main = () => {
                 >
                   <div className="elementor-widget-container">
                     <p>
-                      Orci aliquid nisi torquent curabitur, fusce at nam
-                      voluptatibus, dis, quas.
+                      We supply a wide range of premium-grade industrial
+                      materials including SMO, Hardox, pipes, bars, and coils.
                     </p>
                   </div>
                 </div>
@@ -702,7 +698,7 @@ const Main = () => {
                   >
                     <div className="elementor-widget-container">
                       <h5 className="elementor-heading-title elementor-size-default">
-                        Cardiology Sector
+                        Agricultural Equipment
                       </h5>
                     </div>
                   </div>
@@ -729,8 +725,8 @@ const Main = () => {
                 >
                   <div className="elementor-widget-container">
                     <p>
-                      Orci aliquid nisi torquent curabitur, fusce at nam
-                      voluptatibus, dis, quas.
+                      Modern tools for modern farming — from rotavators to water
+                      tankers, built tough for India’s toughest fields.
                     </p>
                   </div>
                 </div>
@@ -803,9 +799,9 @@ const Main = () => {
                 <div className="ekit-wid-con">
                   <div className="ekit-heading elementskit-section-title-wraper text_center   ekit_heading_tablet-   ekit_heading_mobile-">
                     <h3 className="ekit-heading--title elementskit-section-title ">
-                      We Are Best Professional In
+                      We Are Leaders in Metal
                       <span>
-                        <span>Medical Sectors</span>
+                        <span>Fabrication & Agriculture</span>
                       </span>
                     </h3>
                   </div>
@@ -882,9 +878,11 @@ const Main = () => {
                     >
                       <div className="elementor-widget-container">
                         <p>
-                          Fugiat at voluptatem quo. Occaecati hic nulla corporis
-                          curabitur taciti quisque exercitation, labore ea!
-                          Repreh enderit. Parturient, id. Lorem unde irure.
+                          At SV PROFILES, precision meets passion. We deliver
+                          expert metal cutting, fabrication, and agricultural
+                          equipment solutions that empower industries and
+                          farmers alike. Our commitment to quality and
+                          innovation drives every project
                         </p>
                       </div>
                     </div>
@@ -908,7 +906,7 @@ const Main = () => {
                               </svg>{" "}
                             </span>
                             <span className="elementor-icon-list-text">
-                              Dolor necessitatibus faucibus wisi.
+                              Skilled craftsmanship with advanced technology.
                             </span>
                           </li>
                           <li className="elementor-icon-list-item">
@@ -923,7 +921,7 @@ const Main = () => {
                               </svg>{" "}
                             </span>
                             <span className="elementor-icon-list-text">
-                              Quibusdam ab ex pulvinar fugit.
+                              Trusted supplier of industrial raw materials.
                             </span>
                           </li>
                           <li className="elementor-icon-list-item">
@@ -938,7 +936,8 @@ const Main = () => {
                               </svg>{" "}
                             </span>
                             <span className="elementor-icon-list-text">
-                              Itaque illo eiusmod pede ornare.
+                              Durable, efficient agri-equipment for all
+                              terrains.
                             </span>
                           </li>
                           <li className="elementor-icon-list-item">
@@ -953,7 +952,7 @@ const Main = () => {
                               </svg>{" "}
                             </span>
                             <span className="elementor-icon-list-text">
-                              Sequi rem iaculis posuere pede viera.
+                              Customer satisfaction is our top priority.
                             </span>
                           </li>
                         </ul>
@@ -979,7 +978,7 @@ const Main = () => {
                       >
                         <div className="elementor-widget-container">
                           <h6 className="elementor-heading-title elementor-size-default">
-                            Opening Hours
+                            Working Hours
                           </h6>
                         </div>
                       </div>
@@ -990,10 +989,7 @@ const Main = () => {
                         data-widget_type="text-editor.default"
                       >
                         <div className="elementor-widget-container">
-                          <p>
-                            Fugiat at voluptatem quo. Occaecati hic nulla
-                            corporis.
-                          </p>
+                          <p>We’re here when you need us most.</p>
                         </div>
                       </div>
                       <div
@@ -1008,7 +1004,7 @@ const Main = () => {
                               <h6 className="ekit-heading--title elementskit-section-title ">
                                 Mon-Fri :{" "}
                                 <span>
-                                  <span>8AM - 10PM</span>
+                                  <span>9AM - 7PM</span>
                                 </span>
                               </h6>
                             </div>
@@ -1027,7 +1023,7 @@ const Main = () => {
                               <h6 className="ekit-heading--title elementskit-section-title ">
                                 Sat-Sun :{" "}
                                 <span>
-                                  <span>7AM - 9PM</span>
+                                  <span>10AM - 5PM</span>
                                 </span>
                               </h6>
                             </div>
@@ -1044,7 +1040,7 @@ const Main = () => {
                           <div className="ekit-wid-con">
                             <div className="ekit-heading elementskit-section-title-wraper text_center   ekit_heading_tablet-   ekit_heading_mobile-">
                               <h6 className="ekit-heading--title elementskit-section-title ">
-                                24*7 Emergency Care Open
+                                Round-the-Clock Service & Support
                               </h6>
                             </div>
                           </div>
@@ -1067,7 +1063,6 @@ const Main = () => {
                       src="/wp-content/uploads/sites/13/2024/09/group-of-doctors-walking-in-corridor-on-medical-co-1024x538.jpg"
                       className="attachment-large size-large wp-image-653"
                       alt
-                      srcSet="https://demo.xperthemes.com/medzoon/wp-content/uploads/sites/13/2024/09/group-of-doctors-walking-in-corridor-on-medical-co-1024x538.jpg 1024w, https://demo.xperthemes.com/medzoon/wp-content/uploads/sites/13/2024/09/group-of-doctors-walking-in-corridor-on-medical-co-300x158.jpg 300w, https://demo.xperthemes.com/medzoon/wp-content/uploads/sites/13/2024/09/group-of-doctors-walking-in-corridor-on-medical-co-768x403.jpg 768w, https://demo.xperthemes.com/medzoon/wp-content/uploads/sites/13/2024/09/group-of-doctors-walking-in-corridor-on-medical-co-800x420.jpg 800w, https://demo.xperthemes.com/medzoon/wp-content/uploads/sites/13/2024/09/group-of-doctors-walking-in-corridor-on-medical-co.jpg 1200w"
                       sizes="(max-width: 800px) 100vw, 800px"
                     />
                   </div>
@@ -1194,7 +1189,7 @@ const Main = () => {
                       >
                         <div className="elementor-widget-container">
                           <h6 className="elementor-heading-title elementor-size-default">
-                            300+ Appointment Booking Confirm for this Week
+                            Trusted by 300+ Clients This Week
                           </h6>
                         </div>
                       </div>
@@ -1337,7 +1332,7 @@ const Main = () => {
                             </svg>{" "}
                           </span>
                           <span className="elementor-icon-list-text">
-                            Skilled Doctors
+                            Precision Projects Completed
                           </span>
                         </li>
                       </ul>
@@ -1395,7 +1390,7 @@ const Main = () => {
                             </svg>{" "}
                           </span>
                           <span className="elementor-icon-list-text">
-                            Winning Awards
+                            Industry Awards Won
                           </span>
                         </li>
                       </ul>
@@ -1453,7 +1448,7 @@ const Main = () => {
                             </svg>{" "}
                           </span>
                           <span className="elementor-icon-list-text">
-                            Medical Beds
+                            Tons of Raw Material Supplied
                           </span>
                         </li>
                       </ul>
@@ -1511,7 +1506,7 @@ const Main = () => {
                             </svg>{" "}
                           </span>
                           <span className="elementor-icon-list-text">
-                            Happy Patients
+                            Satisfied Customers Served
                           </span>
                         </li>
                       </ul>
@@ -1585,7 +1580,7 @@ const Main = () => {
                           </svg>{" "}
                         </span>
                         <span className="elementor-icon-list-text">
-                          OUR PROFESSIONALS
+                          OUR PRODUCTS
                         </span>
                       </li>
                     </ul>
@@ -1600,9 +1595,9 @@ const Main = () => {
                     <div className="ekit-wid-con">
                       <div className="ekit-heading elementskit-section-title-wraper text_left   ekit_heading_tablet-text_center   ekit_heading_mobile-">
                         <h3 className="ekit-heading--title elementskit-section-title ">
-                          Our Best Qualified{" "}
+                          High-Quality Industrial &{" "}
                           <span>
-                            <span>Medical Professionals</span>
+                            <span>Agricultural Solutions</span>
                           </span>
                         </h3>
                       </div>
@@ -1624,10 +1619,11 @@ const Main = () => {
                 >
                   <div className="elementor-widget-container">
                     <p>
-                      Orci aliquid nisi torquent curabitur, fusce at
-                      voluptatibus, dis, quas nam pellentesque. Varius! Sint,
-                      soluta illo ultricies eros erat nullam. Lobortis metus,
-                      eum ad, lobortis temporibus.
+                      At SV PROFILES, we offer a diverse range of products
+                      engineered to meet the highest standards of durability and
+                      precision. Whether it’s raw materials for heavy industries
+                      or modern equipment for agriculture, our products ensure
+                      performance and reliability.
                     </p>
                   </div>
                 </div>
@@ -1638,6 +1634,7 @@ const Main = () => {
               data-id="d1eb1f2"
               data-element_type="container"
             >
+              {/* Card 1 */}
               <div
                 className="elementor-element elementor-element-b3c8983 e-con-full e-transform e-flex elementor-invisible e-con e-child"
                 data-id="b3c8983"
@@ -1645,12 +1642,31 @@ const Main = () => {
                 data-settings='{"background_background":"gradient","_transform_translateY_effect_hover":{"unit":"px","size":-10,"sizes":[]},"animation":"fadeInLeft","_transform_translateX_effect_hover":{"unit":"px","size":"","sizes":[]},"_transform_translateX_effect_hover_tablet":{"unit":"px","size":"","sizes":[]},"_transform_translateX_effect_hover_mobile":{"unit":"px","size":"","sizes":[]},"_transform_translateY_effect_hover_tablet":{"unit":"px","size":"","sizes":[]},"_transform_translateY_effect_hover_mobile":{"unit":"px","size":"","sizes":[]}}'
               >
                 <div
-                  className="elementor-element elementor-element-2a10438 e-con-full e-flex e-con e-child"
+                  className="elementor-element"
+                  data-id="fc5d0ea"
+                  data-element_type="widget"
+                  data-widget_type="image.default"
+                >
+                  <div className="elementor-widget-container">
+                    <img
+                      loading="lazy"
+                      decoding="async"
+                      width={300}
+                      height={500}
+                      src="https://i.pinimg.com/736x/ea/14/30/ea1430fe6e7e87b26d170c997531a5e4.jpg"
+                      className="attachment-large size-large wp-image-644"
+                      alt
+                      sizes="(max-width: 500px) 100vw, 500px"
+                    />
+                  </div>
+                </div>
+                <div
+                  className="elementor-element elementor-element-2a10438 "
                   data-id="2a10438"
                   data-element_type="container"
                 >
                   <div
-                    className="elementor-element elementor-element-74a4d3c e-con-full e-flex e-con e-child"
+                    className="elementor-element elementor-element-74a4d3c"
                     data-id="74a4d3c"
                     data-element_type="container"
                   >
@@ -1664,64 +1680,27 @@ const Main = () => {
                         <div className="ekit-wid-con">
                           <div className="ekit-heading elementskit-section-title-wraper text_left   ekit_heading_tablet-   ekit_heading_mobile-">
                             <h5 className="ekit-heading--title elementskit-section-title ">
-                              Dr. George Taylor
+                              CNC Gas Cut Profiles
                             </h5>
                             <h3 className="ekit-heading--subtitle elementskit-section-subtitle  ">
-                              NEUROLOGY SPECIALIST
+                              High-precision metal profiles cut using CNC gas
+                              technology. Suitable for heavy-duty applications
+                              with thickness ranging from 5mm to 150mm.
+                              Engineered for accuracy and strength.
                             </h3>
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div
-                    className="elementor-element elementor-element-dc27bb0 e-con-full e-flex e-con e-child"
-                    data-id="dc27bb0"
-                    data-element_type="container"
-                  >
-                    <div
-                      className="elementor-element elementor-element-e489207 elementor-view-default elementor-widget elementor-widget-icon"
-                      data-id="e489207"
-                      data-element_type="widget"
-                      data-widget_type="icon.default"
-                    >
-                      <div className="elementor-widget-container">
-                        <div className="elementor-icon-wrapper">
-                          <div className="elementor-icon">
-                            <i aria-hidden="true" className="icon icon-brain" />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
                 </div>
                 <div
-                  className="elementor-element elementor-element-fc5d0ea elementor-widget elementor-widget-image"
-                  data-id="fc5d0ea"
-                  data-element_type="widget"
-                  data-widget_type="image.default"
-                >
-                  <div className="elementor-widget-container">
-                    <img
-                      loading="lazy"
-                      decoding="async"
-                      width={500}
-                      height={500}
-                      src="/wp-content/uploads/sites/13/2024/09/medical-doctors-at-the-conference.jpg"
-                      className="attachment-large size-large wp-image-644"
-                      alt
-                      srcSet="https://demo.xperthemes.com/medzoon/wp-content/uploads/sites/13/2024/09/medical-doctors-at-the-conference.jpg 500w, https://demo.xperthemes.com/medzoon/wp-content/uploads/sites/13/2024/09/medical-doctors-at-the-conference-300x300.jpg 300w, https://demo.xperthemes.com/medzoon/wp-content/uploads/sites/13/2024/09/medical-doctors-at-the-conference-150x150.jpg 150w"
-                      sizes="(max-width: 500px) 100vw, 500px"
-                    />
-                  </div>
-                </div>
-                <div
-                  className="elementor-element elementor-element-ab33c77 e-con-full e-flex e-con e-child"
+                  className="elementor-element elementor-element-ab33c77"
                   data-id="ab33c77"
                   data-element_type="container"
                 >
                   <div
-                    className="elementor-element elementor-element-7288908 e-con-full e-flex e-con e-child"
+                    className="elementor-element elementor-element-7288908"
                     data-id={7288908}
                     data-element_type="container"
                   >
@@ -1739,7 +1718,7 @@ const Main = () => {
                           >
                             <span className="elementor-button-content-wrapper">
                               <span className="elementor-button-text">
-                                GET APPOINTMENT
+                                Order now
                               </span>
                             </span>
                           </a>
@@ -1747,122 +1726,18 @@ const Main = () => {
                       </div>
                     </div>
                   </div>
-                  <div
-                    className="elementor-element elementor-element-0c4df5c e-con-full e-flex e-con e-child"
-                    data-id="0c4df5c"
-                    data-element_type="container"
-                  >
-                    <div
-                      className="elementor-element elementor-element-8290667 e-grid-align-right e-grid-align-mobile-center elementor-shape-rounded elementor-grid-0 elementor-widget elementor-widget-social-icons"
-                      data-id={8290667}
-                      data-element_type="widget"
-                      data-widget_type="social-icons.default"
-                    >
-                      <div className="elementor-widget-container">
-                        <div className="elementor-social-icons-wrapper elementor-grid">
-                          <span className="elementor-grid-item">
-                            <a
-                              className="elementor-icon elementor-social-icon elementor-social-icon-facebook elementor-repeater-item-8663724"
-                              target="_blank"
-                            >
-                              <span className="elementor-screen-only">
-                                Facebook
-                              </span>
-                              <svg
-                                className="e-font-icon-svg e-fab-facebook"
-                                viewBox="0 0 512 512"
-                                xmlns="http://www.w3.org/2000/svg"
-                              >
-                                <path d="M504 256C504 119 393 8 256 8S8 119 8 256c0 123.78 90.69 226.38 209.25 245V327.69h-63V256h63v-54.64c0-62.15 37-96.48 93.67-96.48 27.14 0 55.52 4.84 55.52 4.84v61h-31.28c-30.8 0-40.41 19.12-40.41 38.73V256h68.78l-11 71.69h-57.78V501C413.31 482.38 504 379.78 504 256z"></path>
-                              </svg>{" "}
-                            </a>
-                          </span>
-                          <span className="elementor-grid-item">
-                            <a
-                              className="elementor-icon elementor-social-icon elementor-social-icon-x-twitter elementor-repeater-item-a19e2d4"
-                              target="_blank"
-                            >
-                              <span className="elementor-screen-only">
-                                X-twitter
-                              </span>
-                              <svg
-                                className="e-font-icon-svg e-fab-x-twitter"
-                                viewBox="0 0 512 512"
-                                xmlns="http://www.w3.org/2000/svg"
-                              >
-                                <path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"></path>
-                              </svg>{" "}
-                            </a>
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
                 </div>
               </div>
+              {/* Card 2 */}
               <div
-                className="elementor-element elementor-element-3de26cd e-con-full e-transform e-flex elementor-invisible e-con e-child"
-                data-id="3de26cd"
+                className="elementor-element elementor-element-b3c8983 e-con-full e-transform e-flex elementor-invisible e-con e-child"
+                data-id="b3c8983"
                 data-element_type="container"
-                data-settings='{"background_background":"gradient","_transform_translateY_effect_hover":{"unit":"px","size":-10,"sizes":[]},"animation":"fadeInUp","_transform_translateX_effect_hover":{"unit":"px","size":"","sizes":[]},"_transform_translateX_effect_hover_tablet":{"unit":"px","size":"","sizes":[]},"_transform_translateX_effect_hover_mobile":{"unit":"px","size":"","sizes":[]},"_transform_translateY_effect_hover_tablet":{"unit":"px","size":"","sizes":[]},"_transform_translateY_effect_hover_mobile":{"unit":"px","size":"","sizes":[]}}'
+                data-settings='{"background_background":"gradient","_transform_translateY_effect_hover":{"unit":"px","size":-10,"sizes":[]},"animation":"fadeInLeft","_transform_translateX_effect_hover":{"unit":"px","size":"","sizes":[]},"_transform_translateX_effect_hover_tablet":{"unit":"px","size":"","sizes":[]},"_transform_translateX_effect_hover_mobile":{"unit":"px","size":"","sizes":[]},"_transform_translateY_effect_hover_tablet":{"unit":"px","size":"","sizes":[]},"_transform_translateY_effect_hover_mobile":{"unit":"px","size":"","sizes":[]}}'
               >
                 <div
-                  className="elementor-element elementor-element-11b95f2 e-con-full e-flex e-con e-child"
-                  data-id="11b95f2"
-                  data-element_type="container"
-                >
-                  <div
-                    className="elementor-element elementor-element-fb3991a e-con-full e-flex e-con e-child"
-                    data-id="fb3991a"
-                    data-element_type="container"
-                  >
-                    <div
-                      className="elementor-element elementor-element-a17a449 elementor-widget elementor-widget-elementskit-heading"
-                      data-id="a17a449"
-                      data-element_type="widget"
-                      data-widget_type="elementskit-heading.default"
-                    >
-                      <div className="elementor-widget-container">
-                        <div className="ekit-wid-con">
-                          <div className="ekit-heading elementskit-section-title-wraper text_left   ekit_heading_tablet-   ekit_heading_mobile-">
-                            <h5 className="ekit-heading--title elementskit-section-title ">
-                              Dr. Jenny Smith
-                            </h5>
-                            <h3 className="ekit-heading--subtitle elementskit-section-subtitle  ">
-                              HEART SPECIALIST
-                            </h3>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div
-                    className="elementor-element elementor-element-97ea779 e-con-full e-flex e-con e-child"
-                    data-id="97ea779"
-                    data-element_type="container"
-                  >
-                    <div
-                      className="elementor-element elementor-element-353a4e0 elementor-view-default elementor-widget elementor-widget-icon"
-                      data-id="353a4e0"
-                      data-element_type="widget"
-                      data-widget_type="icon.default"
-                    >
-                      <div className="elementor-widget-container">
-                        <div className="elementor-icon-wrapper">
-                          <div className="elementor-icon">
-                            <i
-                              aria-hidden="true"
-                              className="jki jki-heart-light"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div
-                  className="elementor-element elementor-element-f752f6a elementor-widget elementor-widget-image"
-                  data-id="f752f6a"
+                  className="elementor-element"
+                  data-id="fc5d0ea"
                   data-element_type="widget"
                   data-widget_type="image.default"
                 >
@@ -1870,29 +1745,62 @@ const Main = () => {
                     <img
                       loading="lazy"
                       decoding="async"
-                      width={500}
+                      width={300}
                       height={500}
-                      src="/wp-content/uploads/sites/13/2024/09/happy-middle-aged-woman-doctor-sitting-at-the-desk.jpg"
-                      className="attachment-large size-large wp-image-643"
+                      src="https://i.pinimg.com/736x/4d/a4/5a/4da45a96a225d635dd09697d1e9fd7a0.jpg"
+                      className="attachment-large size-large wp-image-644"
                       alt
-                      srcSet="https://demo.xperthemes.com/medzoon/wp-content/uploads/sites/13/2024/09/happy-middle-aged-woman-doctor-sitting-at-the-desk.jpg 500w, https://demo.xperthemes.com/medzoon/wp-content/uploads/sites/13/2024/09/happy-middle-aged-woman-doctor-sitting-at-the-desk-300x300.jpg 300w, https://demo.xperthemes.com/medzoon/wp-content/uploads/sites/13/2024/09/happy-middle-aged-woman-doctor-sitting-at-the-desk-150x150.jpg 150w"
                       sizes="(max-width: 500px) 100vw, 500px"
                     />
                   </div>
                 </div>
                 <div
-                  className="elementor-element elementor-element-dd2dd63 e-con-full e-flex e-con e-child"
-                  data-id="dd2dd63"
+                  className="elementor-element elementor-element-2a10438 "
+                  data-id="2a10438"
                   data-element_type="container"
                 >
                   <div
-                    className="elementor-element elementor-element-c86639c e-con-full e-flex e-con e-child"
-                    data-id="c86639c"
+                    className="elementor-element elementor-element-74a4d3c"
+                    data-id="74a4d3c"
                     data-element_type="container"
                   >
                     <div
-                      className="elementor-element elementor-element-74c13ac elementor-align-left elementor-mobile-align-center elementor-widget elementor-widget-button"
-                      data-id="74c13ac"
+                      className="elementor-element elementor-element-5039b77 elementor-widget elementor-widget-elementskit-heading"
+                      data-id="5039b77"
+                      data-element_type="widget"
+                      data-widget_type="elementskit-heading.default"
+                    >
+                      <div className="elementor-widget-container">
+                        <div className="ekit-wid-con">
+                          <div className="ekit-heading elementskit-section-title-wraper text_left   ekit_heading_tablet-   ekit_heading_mobile-">
+                            <h5 className="ekit-heading--title elementskit-section-title ">
+                              Rotavators
+                            </h5>
+                            <h3 className="ekit-heading--subtitle elementskit-section-subtitle  ">
+                              Durable farm equipment designed to improve soil
+                              structure by breaking clods and killing weeds.
+                              Power-driven by tractor PTO, ideal for modern
+                              farming efficiency.
+                            </h3>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  className="elementor-element elementor-element-ab33c77"
+                  data-id="ab33c77"
+                  data-element_type="container"
+                >
+                  <div
+                    className="elementor-element elementor-element-7288908"
+                    data-id={7288908}
+                    data-element_type="container"
+                  >
+                    <div
+                      className="elementor-element elementor-element-b9cd6c0 elementor-align-left elementor-mobile-align-center elementor-widget elementor-widget-button"
+                      data-id="b9cd6c0"
                       data-element_type="widget"
                       data-widget_type="button.default"
                     >
@@ -1904,7 +1812,7 @@ const Main = () => {
                           >
                             <span className="elementor-button-content-wrapper">
                               <span className="elementor-button-text">
-                                GET APPOINTMENT
+                                Order now
                               </span>
                             </span>
                           </a>
@@ -1912,122 +1820,18 @@ const Main = () => {
                       </div>
                     </div>
                   </div>
-                  <div
-                    className="elementor-element elementor-element-78f63b8 e-con-full e-flex e-con e-child"
-                    data-id="78f63b8"
-                    data-element_type="container"
-                  >
-                    <div
-                      className="elementor-element elementor-element-653c6ad e-grid-align-right e-grid-align-mobile-center elementor-shape-rounded elementor-grid-0 elementor-widget elementor-widget-social-icons"
-                      data-id="653c6ad"
-                      data-element_type="widget"
-                      data-widget_type="social-icons.default"
-                    >
-                      <div className="elementor-widget-container">
-                        <div className="elementor-social-icons-wrapper elementor-grid">
-                          <span className="elementor-grid-item">
-                            <a
-                              className="elementor-icon elementor-social-icon elementor-social-icon-facebook elementor-repeater-item-8663724"
-                              target="_blank"
-                            >
-                              <span className="elementor-screen-only">
-                                Facebook
-                              </span>
-                              <svg
-                                className="e-font-icon-svg e-fab-facebook"
-                                viewBox="0 0 512 512"
-                                xmlns="http://www.w3.org/2000/svg"
-                              >
-                                <path d="M504 256C504 119 393 8 256 8S8 119 8 256c0 123.78 90.69 226.38 209.25 245V327.69h-63V256h63v-54.64c0-62.15 37-96.48 93.67-96.48 27.14 0 55.52 4.84 55.52 4.84v61h-31.28c-30.8 0-40.41 19.12-40.41 38.73V256h68.78l-11 71.69h-57.78V501C413.31 482.38 504 379.78 504 256z"></path>
-                              </svg>{" "}
-                            </a>
-                          </span>
-                          <span className="elementor-grid-item">
-                            <a
-                              className="elementor-icon elementor-social-icon elementor-social-icon-x-twitter elementor-repeater-item-a19e2d4"
-                              target="_blank"
-                            >
-                              <span className="elementor-screen-only">
-                                X-twitter
-                              </span>
-                              <svg
-                                className="e-font-icon-svg e-fab-x-twitter"
-                                viewBox="0 0 512 512"
-                                xmlns="http://www.w3.org/2000/svg"
-                              >
-                                <path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"></path>
-                              </svg>{" "}
-                            </a>
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
                 </div>
               </div>
+              {/* Card 3 */}
               <div
-                className="elementor-element elementor-element-5b2c1cc e-con-full e-transform e-flex elementor-invisible e-con e-child"
-                data-id="5b2c1cc"
+                className="elementor-element elementor-element-b3c8983 e-con-full e-transform e-flex elementor-invisible e-con e-child"
+                data-id="b3c8983"
                 data-element_type="container"
-                data-settings='{"background_background":"gradient","_transform_translateY_effect_hover":{"unit":"px","size":-10,"sizes":[]},"animation":"fadeInRight","_transform_translateX_effect_hover":{"unit":"px","size":"","sizes":[]},"_transform_translateX_effect_hover_tablet":{"unit":"px","size":"","sizes":[]},"_transform_translateX_effect_hover_mobile":{"unit":"px","size":"","sizes":[]},"_transform_translateY_effect_hover_tablet":{"unit":"px","size":"","sizes":[]},"_transform_translateY_effect_hover_mobile":{"unit":"px","size":"","sizes":[]}}'
+                data-settings='{"background_background":"gradient","_transform_translateY_effect_hover":{"unit":"px","size":-10,"sizes":[]},"animation":"fadeInLeft","_transform_translateX_effect_hover":{"unit":"px","size":"","sizes":[]},"_transform_translateX_effect_hover_tablet":{"unit":"px","size":"","sizes":[]},"_transform_translateX_effect_hover_mobile":{"unit":"px","size":"","sizes":[]},"_transform_translateY_effect_hover_tablet":{"unit":"px","size":"","sizes":[]},"_transform_translateY_effect_hover_mobile":{"unit":"px","size":"","sizes":[]}}'
               >
                 <div
-                  className="elementor-element elementor-element-bc71975 e-con-full e-flex e-con e-child"
-                  data-id="bc71975"
-                  data-element_type="container"
-                >
-                  <div
-                    className="elementor-element elementor-element-e04fbe0 e-con-full e-flex e-con e-child"
-                    data-id="e04fbe0"
-                    data-element_type="container"
-                  >
-                    <div
-                      className="elementor-element elementor-element-0d12bea elementor-widget elementor-widget-elementskit-heading"
-                      data-id="0d12bea"
-                      data-element_type="widget"
-                      data-widget_type="elementskit-heading.default"
-                    >
-                      <div className="elementor-widget-container">
-                        <div className="ekit-wid-con">
-                          <div className="ekit-heading elementskit-section-title-wraper text_left   ekit_heading_tablet-   ekit_heading_mobile-">
-                            <h5 className="ekit-heading--title elementskit-section-title ">
-                              Dr. Alexis South
-                            </h5>
-                            <h3 className="ekit-heading--subtitle elementskit-section-subtitle  ">
-                              DENTAL SPECIALIST
-                            </h3>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div
-                    className="elementor-element elementor-element-d2039e7 e-con-full e-flex e-con e-child"
-                    data-id="d2039e7"
-                    data-element_type="container"
-                  >
-                    <div
-                      className="elementor-element elementor-element-444c353 elementor-view-default elementor-widget elementor-widget-icon"
-                      data-id="444c353"
-                      data-element_type="widget"
-                      data-widget_type="icon.default"
-                    >
-                      <div className="elementor-widget-container">
-                        <div className="elementor-icon-wrapper">
-                          <div className="elementor-icon">
-                            <i
-                              aria-hidden="true"
-                              className="icon icon-tooth-2"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div
-                  className="elementor-element elementor-element-3277eb4 elementor-widget elementor-widget-image"
-                  data-id="3277eb4"
+                  className="elementor-element"
+                  data-id="fc5d0ea"
                   data-element_type="widget"
                   data-widget_type="image.default"
                 >
@@ -2035,29 +1839,62 @@ const Main = () => {
                     <img
                       loading="lazy"
                       decoding="async"
-                      width={500}
+                      width={300}
                       height={500}
-                      src="/wp-content/uploads/sites/13/2024/09/consultations-with-doctors-and-portrait-of-female.jpg"
-                      className="attachment-large size-large wp-image-642"
+                      src="https://i.pinimg.com/736x/d5/e8/6a/d5e86a0fb02212092f7d448d2851e34e.jpg"
+                      className="attachment-large size-large wp-image-644"
                       alt
-                      srcSet="https://demo.xperthemes.com/medzoon/wp-content/uploads/sites/13/2024/09/consultations-with-doctors-and-portrait-of-female.jpg 500w, https://demo.xperthemes.com/medzoon/wp-content/uploads/sites/13/2024/09/consultations-with-doctors-and-portrait-of-female-300x300.jpg 300w, https://demo.xperthemes.com/medzoon/wp-content/uploads/sites/13/2024/09/consultations-with-doctors-and-portrait-of-female-150x150.jpg 150w"
                       sizes="(max-width: 500px) 100vw, 500px"
                     />
                   </div>
                 </div>
                 <div
-                  className="elementor-element elementor-element-31ad728 e-con-full e-flex e-con e-child"
-                  data-id="31ad728"
+                  className="elementor-element elementor-element-2a10438 "
+                  data-id="2a10438"
                   data-element_type="container"
                 >
                   <div
-                    className="elementor-element elementor-element-9c55e33 e-con-full e-flex e-con e-child"
-                    data-id="9c55e33"
+                    className="elementor-element elementor-element-74a4d3c"
+                    data-id="74a4d3c"
                     data-element_type="container"
                   >
                     <div
-                      className="elementor-element elementor-element-3fff0d2 elementor-align-left elementor-mobile-align-center elementor-widget elementor-widget-button"
-                      data-id="3fff0d2"
+                      className="elementor-element elementor-element-5039b77 elementor-widget elementor-widget-elementskit-heading"
+                      data-id="5039b77"
+                      data-element_type="widget"
+                      data-widget_type="elementskit-heading.default"
+                    >
+                      <div className="elementor-widget-container">
+                        <div className="ekit-wid-con">
+                          <div className="ekit-heading elementskit-section-title-wraper text_left   ekit_heading_tablet-   ekit_heading_mobile-">
+                            <h5 className="ekit-heading--title elementskit-section-title ">
+                              Industrial Raw Materials
+                            </h5>
+                            <h3 className="ekit-heading--subtitle elementskit-section-subtitle  ">
+                              Wide selection of premium-grade materials
+                              including SMO, Hardox, round bars, pipes, and
+                              coils. Sourced for quality and consistency, ready
+                              for various industrial applications.
+                            </h3>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  className="elementor-element elementor-element-ab33c77"
+                  data-id="ab33c77"
+                  data-element_type="container"
+                >
+                  <div
+                    className="elementor-element elementor-element-7288908"
+                    data-id={7288908}
+                    data-element_type="container"
+                  >
+                    <div
+                      className="elementor-element elementor-element-b9cd6c0 elementor-align-left elementor-mobile-align-center elementor-widget elementor-widget-button"
+                      data-id="b9cd6c0"
                       data-element_type="widget"
                       data-widget_type="button.default"
                     >
@@ -2069,61 +1906,10 @@ const Main = () => {
                           >
                             <span className="elementor-button-content-wrapper">
                               <span className="elementor-button-text">
-                                GET APPOINTMENT
+                                Order now
                               </span>
                             </span>
                           </a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div
-                    className="elementor-element elementor-element-6be83cb e-con-full e-flex e-con e-child"
-                    data-id="6be83cb"
-                    data-element_type="container"
-                  >
-                    <div
-                      className="elementor-element elementor-element-63b4916 e-grid-align-right e-grid-align-mobile-center elementor-shape-rounded elementor-grid-0 elementor-widget elementor-widget-social-icons"
-                      data-id="63b4916"
-                      data-element_type="widget"
-                      data-widget_type="social-icons.default"
-                    >
-                      <div className="elementor-widget-container">
-                        <div className="elementor-social-icons-wrapper elementor-grid">
-                          <span className="elementor-grid-item">
-                            <a
-                              className="elementor-icon elementor-social-icon elementor-social-icon-facebook elementor-repeater-item-8663724"
-                              target="_blank"
-                            >
-                              <span className="elementor-screen-only">
-                                Facebook
-                              </span>
-                              <svg
-                                className="e-font-icon-svg e-fab-facebook"
-                                viewBox="0 0 512 512"
-                                xmlns="http://www.w3.org/2000/svg"
-                              >
-                                <path d="M504 256C504 119 393 8 256 8S8 119 8 256c0 123.78 90.69 226.38 209.25 245V327.69h-63V256h63v-54.64c0-62.15 37-96.48 93.67-96.48 27.14 0 55.52 4.84 55.52 4.84v61h-31.28c-30.8 0-40.41 19.12-40.41 38.73V256h68.78l-11 71.69h-57.78V501C413.31 482.38 504 379.78 504 256z"></path>
-                              </svg>{" "}
-                            </a>
-                          </span>
-                          <span className="elementor-grid-item">
-                            <a
-                              className="elementor-icon elementor-social-icon elementor-social-icon-x-twitter elementor-repeater-item-a19e2d4"
-                              target="_blank"
-                            >
-                              <span className="elementor-screen-only">
-                                X-twitter
-                              </span>
-                              <svg
-                                className="e-font-icon-svg e-fab-x-twitter"
-                                viewBox="0 0 512 512"
-                                xmlns="http://www.w3.org/2000/svg"
-                              >
-                                <path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"></path>
-                              </svg>{" "}
-                            </a>
-                          </span>
                         </div>
                       </div>
                     </div>
@@ -2163,7 +1949,7 @@ const Main = () => {
                     >
                       <span className="elementor-button-content-wrapper">
                         <span className="elementor-button-text">
-                          FREE CONSULTATION
+                          REQUEST A CALLBACK
                         </span>
                       </span>
                     </a>
@@ -2173,7 +1959,7 @@ const Main = () => {
             </div>
           </div>
         </div>
-        <div
+        {/* <div
           className="elementor-element elementor-element-082e1bb e-flex e-con-boxed e-con e-parent"
           data-id="082e1bb"
           data-element_type="container"
@@ -2522,7 +2308,7 @@ const Main = () => {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
         <div
           className="elementor-element elementor-element-193fa62 e-flex e-con-boxed e-con e-parent"
           data-id="193fa62"
@@ -2556,7 +2342,7 @@ const Main = () => {
                         </svg>{" "}
                       </span>
                       <span className="elementor-icon-list-text">
-                        HEALTH &amp; MEDICAL{" "}
+                        METAL &amp; AGRICULTURE{" "}
                       </span>
                     </li>
                   </ul>
@@ -2572,16 +2358,17 @@ const Main = () => {
                   <div className="ekit-wid-con">
                     <div className="ekit-heading elementskit-section-title-wraper text_left   ekit_heading_tablet-text_center   ekit_heading_mobile-">
                       <h3 className="ekit-heading--title elementskit-section-title ">
-                        Caring For You,{" "}
+                        Shaping Precision,{" "}
                         <span>
-                          <span>Care For Health</span>
+                          <span>Building Tomorrow</span>
                         </span>
                       </h3>
                       <div className="ekit-heading__description">
                         <p>
-                          Dolorem fames quas porta arcu illo. Fuga optio do
-                          sociosqu recusandae fuga curae natoque semper sunt
-                          fusce.
+                          At SV PROFILES, we combine expert metalwork with
+                          innovative agricultural solutions to empower
+                          industries and farmers alike. Quality, durability, and
+                          precision are our promise.
                         </p>
                       </div>
                     </div>
@@ -2607,7 +2394,7 @@ const Main = () => {
                       >
                         <span className="elementor-button-content-wrapper">
                           <span className="elementor-button-text">
-                            FREE CONSULTATION
+                            GET A FREE QUOTE
                           </span>
                         </span>
                       </a>
@@ -2668,7 +2455,6 @@ const Main = () => {
                     src="/wp-content/uploads/sites/13/2024/09/medical-staff1.png"
                     className="attachment-large size-large wp-image-672"
                     alt
-                    srcSet="https://demo.xperthemes.com/medzoon/wp-content/uploads/sites/13/2024/09/medical-staff1.png 800w, https://demo.xperthemes.com/medzoon/wp-content/uploads/sites/13/2024/09/medical-staff1-300x252.png 300w, https://demo.xperthemes.com/medzoon/wp-content/uploads/sites/13/2024/09/medical-staff1-768x646.png 768w"
                     sizes="(max-width: 800px) 100vw, 800px"
                   />
                 </div>
@@ -2701,7 +2487,7 @@ const Main = () => {
                 >
                   <div className="elementor-widget-container">
                     <h4 className="elementor-heading-title elementor-size-default">
-                      Let's Book Your Appointment !
+                      Let’s Start Your Project Today!
                     </h4>
                   </div>
                 </div>
@@ -2713,8 +2499,8 @@ const Main = () => {
                 >
                   <div className="elementor-widget-container">
                     <p>
-                      Ut elit tellus, luctus nec ullamcorper mattis, pulvinar
-                      dapibus leo.
+                      Contact us for customized metal fabrication and farm
+                      equipment solutions tailored to your needs.
                     </p>
                   </div>
                 </div>
@@ -3385,10 +3171,7 @@ const Main = () => {
                 >
                   <div className="elementor-widget-container">
                     <p>
-                      Orci aliquid nisi torquent curabitur, fusce at
-                      voluptatibus, dis, quas nam pellentesque. Varius! Sint,
-                      soluta illo ultricies eros erat nullam. Lobortis metus,
-                      eum ad, lobortis temporibus.
+                      Stay informed with the latest trends in metal fabrication and agricultural technology. Tips, news, and expert advice to help your projects succeed.
                     </p>
                   </div>
                 </div>
@@ -3421,11 +3204,10 @@ const Main = () => {
                                 decoding="async"
                                 width={1200}
                                 height={900}
-                                src="/wp-content/uploads/sites/13/2024/09/dentist-with-patient-at-hospital.jpg"
+                                src="https://i.pinimg.com/736x/e1/0c/92/e10c9267747cdf73f5e3654e32b1c247.jpg"
                                 className="attachment-full size-full wp-post-image"
                                 alt
-                                srcSet="https://demo.xperthemes.com/medzoon/wp-content/uploads/sites/13/2024/09/dentist-with-patient-at-hospital.jpg 1200w, https://demo.xperthemes.com/medzoon/wp-content/uploads/sites/13/2024/09/dentist-with-patient-at-hospital-300x225.jpg 300w, https://demo.xperthemes.com/medzoon/wp-content/uploads/sites/13/2024/09/dentist-with-patient-at-hospital-1024x768.jpg 1024w, https://demo.xperthemes.com/medzoon/wp-content/uploads/sites/13/2024/09/dentist-with-patient-at-hospital-768x576.jpg 768w, https://demo.xperthemes.com/medzoon/wp-content/uploads/sites/13/2024/09/dentist-with-patient-at-hospital-800x600.jpg 800w"
-                                sizes="auto, (max-width: 1200px) 100vw, 1200px"
+                                 sizes="auto, (max-width: 1200px) 100vw, 1200px"
                               />
                             </div>
                           </a>
@@ -3435,7 +3217,7 @@ const Main = () => {
                                 href="https://demo.xperthemes.com/medzoon/category/med-tech/"
                                 className="category-med-tech"
                               >
-                                Med Tech
+                                Industrial Innovation
                               </a>
                             </span>
                           </div>
@@ -3443,7 +3225,7 @@ const Main = () => {
                         <div className="jkit-postblock-content">
                           <h3 className="jkit-post-title">
                             <a href="https://demo.xperthemes.com/medzoon/medical-care-need-to-be-trustworthy/">
-                              Medical Care Need To Be Trustworthy
+                              Advances in CNC Cutting Technologies
                             </a>
                           </h3>
                           <div className="jkit-post-meta">
@@ -3458,7 +3240,7 @@ const Main = () => {
                               </svg>
                               <span className="by">by</span>
                               <a href="https://demo.xperthemes.com/medzoon/author/xperteam/">
-                                xperteam
+                                SV Profiles
                               </a>
                             </div>
                             <div className="jkit-meta-date icon-position-before">
@@ -3488,10 +3270,9 @@ const Main = () => {
                                 decoding="async"
                                 width={1200}
                                 height={900}
-                                src="/wp-content/uploads/sites/13/2024/09/team-of-surgeons-performing-operation-at-hospital.jpg"
+                                src="https://i.pinimg.com/736x/18/d4/3e/18d43e0c3fb8eb97e75114f16bd77549.jpg"
                                 className="attachment-full size-full wp-post-image"
                                 alt
-                                srcSet="https://demo.xperthemes.com/medzoon/wp-content/uploads/sites/13/2024/09/team-of-surgeons-performing-operation-at-hospital.jpg 1200w, https://demo.xperthemes.com/medzoon/wp-content/uploads/sites/13/2024/09/team-of-surgeons-performing-operation-at-hospital-300x225.jpg 300w, https://demo.xperthemes.com/medzoon/wp-content/uploads/sites/13/2024/09/team-of-surgeons-performing-operation-at-hospital-1024x768.jpg 1024w, https://demo.xperthemes.com/medzoon/wp-content/uploads/sites/13/2024/09/team-of-surgeons-performing-operation-at-hospital-768x576.jpg 768w, https://demo.xperthemes.com/medzoon/wp-content/uploads/sites/13/2024/09/team-of-surgeons-performing-operation-at-hospital-800x600.jpg 800w"
                                 sizes="auto, (max-width: 1200px) 100vw, 1200px"
                               />
                             </div>
@@ -3502,7 +3283,7 @@ const Main = () => {
                                 href="https://demo.xperthemes.com/medzoon/category/health/"
                                 className="category-health"
                               >
-                                Health
+                                Agriculture
                               </a>
                             </span>
                           </div>
@@ -3510,7 +3291,7 @@ const Main = () => {
                         <div className="jkit-postblock-content">
                           <h3 className="jkit-post-title">
                             <a href="https://demo.xperthemes.com/medzoon/must-read-safety-guide-for-swine-flu-season/">
-                              Must Read Safety Guide For Swine Flu Season
+                              Modern Tools for Sustainable Farming
                             </a>
                           </h3>
                           <div className="jkit-post-meta">
@@ -3525,7 +3306,7 @@ const Main = () => {
                               </svg>
                               <span className="by">by</span>
                               <a href="https://demo.xperthemes.com/medzoon/author/xperteam/">
-                                xperteam
+                                SV Profiles
                               </a>
                             </div>
                             <div className="jkit-meta-date icon-position-before">
@@ -3555,11 +3336,10 @@ const Main = () => {
                                 decoding="async"
                                 width={1200}
                                 height={900}
-                                src="/wp-content/uploads/sites/13/2024/09/medical-exam-at-hospital.jpg"
+                                src="https://i.pinimg.com/736x/5f/dd/e2/5fdde2e4624dd1464bfe62df60a3ebce.jpg"
                                 className="attachment-full size-full wp-post-image"
                                 alt
-                                srcSet="https://demo.xperthemes.com/medzoon/wp-content/uploads/sites/13/2024/09/medical-exam-at-hospital.jpg 1200w, https://demo.xperthemes.com/medzoon/wp-content/uploads/sites/13/2024/09/medical-exam-at-hospital-300x225.jpg 300w, https://demo.xperthemes.com/medzoon/wp-content/uploads/sites/13/2024/09/medical-exam-at-hospital-1024x768.jpg 1024w, https://demo.xperthemes.com/medzoon/wp-content/uploads/sites/13/2024/09/medical-exam-at-hospital-768x576.jpg 768w, https://demo.xperthemes.com/medzoon/wp-content/uploads/sites/13/2024/09/medical-exam-at-hospital-800x600.jpg 800w"
-                                sizes="auto, (max-width: 1200px) 100vw, 1200px"
+                                 sizes="auto, (max-width: 1200px) 100vw, 1200px"
                               />
                             </div>
                           </a>
@@ -3569,7 +3349,7 @@ const Main = () => {
                                 href="https://demo.xperthemes.com/medzoon/category/health/"
                                 className="category-health"
                               >
-                                Health
+                                Materials
                               </a>
                             </span>
                           </div>
@@ -3577,7 +3357,7 @@ const Main = () => {
                         <div className="jkit-postblock-content">
                           <h3 className="jkit-post-title">
                             <a href="https://demo.xperthemes.com/medzoon/best-gynecologists-surgeons-in-hospital/">
-                              Best Gynecologists Surgeons In Hospital
+                              Choosing the Right Raw Materials for Durability
                             </a>
                           </h3>
                           <div className="jkit-post-meta">
@@ -3592,7 +3372,7 @@ const Main = () => {
                               </svg>
                               <span className="by">by</span>
                               <a href="https://demo.xperthemes.com/medzoon/author/xperteam/">
-                                xperteam
+                                SV Profiles
                               </a>
                             </div>
                             <div className="jkit-meta-date icon-position-before">

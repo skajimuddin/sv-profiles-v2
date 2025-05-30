@@ -302,7 +302,7 @@ const Footer = () => {
                   >
                     <div className="elementor-widget-container">
                       <h6 className="elementor-heading-title elementor-size-default">
-                        Our Medical Services
+                        Our Services
                       </h6>
                     </div>
                   </div>

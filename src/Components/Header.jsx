@@ -54,6 +54,7 @@ const Header = () => {
                         <div className="hfe-site-logo-set">
                           <div className="hfe-site-logo-container">
                             <img
+                              style={{ width: "100%" }}
                               className="hfe-site-logo-img elementor-animation-"
                               src="/wp-content/uploads/sites/13/2024/09/logo.png"
                               alt="default-logo"
@@ -165,7 +166,7 @@ const Header = () => {
                       >
                         <span className="elementor-button-content-wrapper">
                           <span className="elementor-button-text">
-                            BOOK AN APPOINTMENT
+                            GET A QUOTE
                           </span>
                         </span>
                       </a>
