@@ -1,6 +1,6 @@
-import Header from "../components/Header"
-import Footer from "../components/Footer"
-import ScriptLoader from "../components/ScriptLoader"
+import Header from "../Components/Header"
+import Footer from "../Components/Footer"
+import ScriptLoader from "../Components/ScriptLoader"
 
 const HomePage = () => {
   return (
