@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap');
 
 :root {
   --primary-color: #dbac56 !important;
@@ -94,38 +94,109 @@ body {
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
-  background-color: white;
+  height: 100vh;
+  background-color: var(--secondary-color, #1c3860);
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
   z-index: 9999;
   transition: opacity 0.5s ease-in-out;
+  overflow: hidden;
 }
 
-.spinner {
-  width: 60px;
-  height: 60px;
-  border: 6px solid #f3f3f3;
-  border-top: 6px solid var(--primary-color, #dbac56);
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
+.preloader-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
-.preloader-text {
-  font-family: 'Poppins', sans-serif;
-  font-size: 24px;
-  font-weight: 600;
-  color: var(--secondary-color, #1c3860);
-  margin-top: 15px;
+/* Removed section styles as we simplified the HTML structure */
+
+.preloader h2 {
+  margin: 0 0 0.5em;
+  color: var(--primary-color, #dbac56);
+  font-size: 30px;
+  text-align: center;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  width: 100%;
 }
 
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
+.preloader .loading {
+  font-size: 84px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  text-align: center;
+  width: 100%;
+  display: inline-block;
+}
+
+.preloader .loading span {
+  display: inline-block;
+  margin: 0 0.2em;
+  color: var(--primary-color, #dbac56);
+  line-height: 1;
+}
+
+/* Media queries for responsive design */
+@media (max-width: 768px) {
+  .preloader .loading {
+    font-size: 42px;
   }
-  100% {
-    transform: rotate(360deg);
+  
+  .preloader h2 {
+    margin-bottom: 1em;
   }
+}
+
+@media (max-width: 480px) {
+  .preloader-container {
+    padding: 0 15px;
+  }
+  
+  .preloader .loading {
+    font-size: 28px;
+    white-space: nowrap;
+    overflow: visible;
+  }
+  
+  .preloader .loading span {
+    margin: 0 0.05em;
+  }
+  
+  .preloader h2 {
+    font-size: 22px;
+    margin-bottom: 1.5em;
+  }
+}
+
+/* CODE #1 Animation */
+.loading01 span {
+  animation: loading01 1.4s infinite alternate;
+}
+.loading01 span:nth-child(1) { animation-delay: 0s; }
+.loading01 span:nth-child(2) { animation-delay: 0.1s; }
+.loading01 span:nth-child(3) { animation-delay: 0.2s; }
+.loading01 span:nth-child(4) { animation-delay: 0.3s; }
+.loading01 span:nth-child(5) { animation-delay: 0.4s; }
+.loading01 span:nth-child(6) { animation-delay: 0.5s; }
+.loading01 span:nth-child(7) { animation-delay: 0.6s; }
+.loading01 span:nth-child(8) { animation-delay: 0.7s; }
+.loading01 span:nth-child(9) { animation-delay: 0.8s; }
+.loading01 span:nth-child(10) { animation-delay: 0.9s; }
+
+@keyframes loading01 {
+  0% { opacity: 1; }
+  100% { opacity: 0; }
 }
