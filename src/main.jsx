@@ -4,6 +4,13 @@ import "./index.css"
 import App from "./App.jsx"
 import Preloader from "./Preloader"
 
+// Import Firebase debugging tools in development mode only
+if (import.meta.env.DEV) {
+  import('./Firebase/firestoreDebugger.js')
+    .then(() => console.log('Firebase debugging tools loaded. Use window.FirebaseDebugTools in console.'))
+    .catch(err => console.error('Failed to load debugging tools:', err));
+}
+
 // Main App wrapper with preloader functionality
 const AppWithPreloader = () => {
   const [loading, setLoading] = useState(true)

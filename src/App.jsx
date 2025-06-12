@@ -1,9 +1,11 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom"
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom"
 import HomePage from "./Pages/HomePage"
 import LoginPage from "./Pages/LoginPage"
 import SignupPage from "./Pages/SignupPage"
 import ForgotPasswordPage from "./Pages/ForgotPasswordPage"
-import { lazy, Suspense } from "react"
+import { lazy, Suspense, useEffect, useState } from "react"
+import { AuthContextProvider, useAuth } from "./Context/AuthContextProvider"
+import Preloader from "./Preloader"
 
 // Create a Not Found Page component
 const NotFoundPage = () => {
@@ -34,19 +36,53 @@ const NotFoundPage = () => {
   )
 }
 
+// Protected Route component
+const ProtectedRoute = ({ children }) => {
+  const { userLoggedIn, loading } = useAuth()
+
+  if (loading) {
+    return <Preloader />
+  }
+
+  if (!userLoggedIn) {
+    return <Navigate to="/login" />
+  }
+
+  return children
+}
+
+function AppRoutes() {
+  const { loading } = useAuth()
+
+  if (loading) {
+    return <Preloader />
+  }
+
+  return (
+    <Routes>
+      <Route path="*" element={<NotFoundPage />} />
+      <Route
+        path="/"
+        element={
+          <ProtectedRoute>
+            <HomePage />
+          </ProtectedRoute>
+        }
+      />
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/signup" element={<SignupPage />} />
+      <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+    </Routes>
+  )
+}
+
 function App() {
   return (
-    <>
-      <BrowserRouter>
-        <Routes>
-          <Route path="*" element={<NotFoundPage />} />
-          <Route path="/" element={<HomePage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/signup" element={<SignupPage />} />
-          <Route path="/forgot-password" element={<ForgotPasswordPage />} />
-        </Routes>
-      </BrowserRouter>
-    </>
+    <BrowserRouter>
+      <AuthContextProvider>
+        <AppRoutes />
+      </AuthContextProvider>
+    </BrowserRouter>
   )
 }
 

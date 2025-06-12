@@ -1,0 +1,42 @@
+// Firebase Security Rules for Firestore
+
+/* 
+To update your security rules:
+1. Go to Firebase Console: https://console.firebase.google.com/
+2. Select your project: test-app-c4c59
+3. Go to Firestore Database in the left menu
+4. Select the "Rules" tab
+5. Replace the existing rules with these rules
+6. Click "Publish"
+*/
+
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // TEMPORARY DEVELOPMENT RULES - REPLACE WITH STRICTER RULES FOR PRODUCTION
+    // This rule allows any authenticated user to read/write any document
+    // This is only for initial development and debugging - DO NOT USE IN PRODUCTION
+    match /{document=**} {
+      allow read, write: if request.auth != null;
+    }
+    
+    /* 
+    // PRODUCTION RULES - UNCOMMENT THESE WHEN READY
+    // Allow authenticated users to read/write their own user document
+    match /users/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+    
+    // Allow creation of user documents
+    match /users/{userId} {
+      allow create: if request.auth != null && request.auth.uid == userId;
+    }
+    
+    // Default deny for everything else
+    match /{document=**} {
+      allow read, write: if false;
+    }
+    */
+    }
+  }
+}

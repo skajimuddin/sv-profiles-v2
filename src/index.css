@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+/* Preloader styles moved to the end of this file to avoid duplication */
+
 :root {
   --primary-color: #dbac56 !important;
   --secondary-color: #1c3860 !important;

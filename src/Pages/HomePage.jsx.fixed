@@ -1,0 +1,146 @@
+import Header from "../Components/Header"
+import Footer from "../Components/Footer"
+import ScriptLoader from "../Components/ScriptLoader"
+import { useAuth } from "../Context/AuthContextProvider"
+import { logout } from "../Firebase/auth"
+import { useNavigate } from "react-router-dom"
+import { testFirestoreAccess, testFirestoreReadAccess } from "../Firebase/testFirestore"
+import { useState } from "react"
+
+const HomePage = () => {
+  const { currentUser, userDetails } = useAuth();
+  const navigate = useNavigate();
+  const [firestoreStatus, setFirestoreStatus] = useState(null);
+  
+  const handleLogout = async () => {
+    try {
+      await logout();
+      navigate('/login');
+    } catch (error) {
+      console.error("Error logging out:", error);
+    }
+  };
+
+  // Function to test Firestore permissions
+  const testFirestorePermissions = async () => {
+    if (!currentUser?.uid) {
+      setFirestoreStatus({ success: false, message: "Not logged in" });
+      return;
+    }
+
+    try {
+      setFirestoreStatus({ loading: true, message: "Testing Firestore access..." });
+      
+      // Test read access
+      const readAccess = await testFirestoreReadAccess(currentUser.uid);
+      
+      // Test write access
+      const writeAccess = await testFirestoreAccess(currentUser.uid);
+      
+      setFirestoreStatus({
+        success: readAccess && writeAccess,
+        readAccess,
+        writeAccess,
+        message: `Read: ${readAccess ? "✅" : "❌"}, Write: ${writeAccess ? "✅" : "❌"}`
+      });
+      
+      // If there are issues, provide guidance
+      if (!readAccess || !writeAccess) {
+        console.info(
+          "%cFirestore Permission Issue Detected: Please check your Firebase security rules",
+          "background: #f44336; color: white; padding: 4px 8px; border-radius: 2px; font-weight: bold"
+        );
+        console.log("See the firebase-security-rules.txt file in your project for recommended rules.");
+      }
+    } catch (error) {
+      setFirestoreStatus({ 
+        success: false, 
+        message: `Error: ${error.message || "Unknown error"}` 
+      });
+    }
+  };
+
+  // Function to show Firestore security rule advice
+  const showFirestoreHelp = () => {
+    alert(
+      "To fix Firestore permissions, update your security rules in the Firebase console:\n\n" +
+      "1. Go to Firebase Console\n" +
+      "2. Select your project\n" +
+      "3. Navigate to Firestore Database > Rules\n" +
+      "4. Update the rules to allow authenticated users to read/write their own data\n\n" +
+      "See the firebase-security-rules.txt file in your project for examples."
+    );
+  };
+
+  return (
+    <>
+      <ScriptLoader />
+      <Header />
+      
+      {/* User profile info and logout button with diagnostic tools */}
+      <div className="bg-white shadow-sm">
+        <div className="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8 flex justify-between items-center">
+          <div className="text-sm">
+            <span className="font-medium">Welcome, {userDetails?.displayName || currentUser?.email || 'User'}</span>
+          </div>
+          <div className="flex space-x-2">
+            <button
+              onClick={testFirestorePermissions}
+              className="inline-flex items-center px-3 py-1 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+            >
+              Test Firestore
+            </button>
+            <button
+              onClick={showFirestoreHelp}
+              className="inline-flex items-center px-3 py-1 border border-transparent text-sm font-medium rounded-md shadow-sm text-gray-700 bg-gray-100 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+            >
+              Help
+            </button>
+            <button
+              onClick={handleLogout}
+              className="inline-flex items-center px-3 py-1 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-[#1c3860] hover:bg-[#162d4d] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#dbac56]"
+            >
+              Logout
+            </button>
+          </div>
+        </div>
+        {firestoreStatus && (
+          <div className={`max-w-7xl mx-auto px-4 py-2 text-sm ${firestoreStatus.success ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
+            <p className="font-medium">Firestore Status: {firestoreStatus.message}</p>
+            {!firestoreStatus.success && (
+              <p className="mt-1">Please update your Firebase security rules to fix this issue.</p>
+            )}
+          </div>
+        )}
+      </div>
+      
+      {/* Main content */}
+      <main>
+        <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+          <div className="px-4 py-6 sm:px-0">
+            <div className="border-4 border-dashed border-gray-200 rounded-lg h-96 p-4 flex flex-col items-center justify-center">
+              <h2 className="text-2xl font-bold mb-4">Welcome to SV Profiles</h2>
+              <p className="text-gray-600 mb-2">You are successfully logged in.</p>
+              <p className="text-gray-600">Use the diagnostic tools above to check your Firestore connection.</p>
+              
+              <div className="mt-8 p-4 bg-blue-50 rounded-md">
+                <h3 className="font-semibold mb-2">Firestore Security Rules Instructions:</h3>
+                <ol className="list-decimal ml-5 text-sm">
+                  <li className="mb-1">Go to Firebase Console</li>
+                  <li className="mb-1">Select your project: test-app-c4c59</li>
+                  <li className="mb-1">Navigate to Firestore Database &gt; Rules</li>
+                  <li className="mb-1">Update the rules using the template from firebase-security-rules.txt</li>
+                  <li className="mb-1">Click "Publish" to apply the new rules</li>
+                </ol>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+      
+      <Footer />
+    </>
+  );
+};
+
+export default HomePage;
