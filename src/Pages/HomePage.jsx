@@ -6,7 +6,7 @@ const HomePage = () => {
   return (
     <>
       <ScriptLoader />
-      <Header />
+      {/* <Header /> */}
       <main>
         <div
           data-elementor-type="wp-post"

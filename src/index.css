@@ -5,6 +5,8 @@
 :root {
   --primary-color: #dbac56 !important;
   --secondary-color: #1c3860 !important;
+  --primary-color-light: rgba(219, 172, 86, 0.1) !important;
+  --secondary-color-light: rgba(28, 56, 96, 0.1) !important;
 }
 
 .elementor-kit-10 {

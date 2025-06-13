@@ -3,8 +3,23 @@ import HomePage from "./Pages/HomePage"
 import LoginPage from "./Pages/LoginPage"
 import SignupPage from "./Pages/SignupPage"
 import ForgotPasswordPage from "./Pages/ForgotPasswordPage"
+import ProductsPage from "./Pages/Orders/ProductsPage"
+import CartPage from "./Pages/Orders/CartPage"
+import OrderSummaryPage from "./Pages/Orders/OrderSummaryPage"
+import OrderHistoryPage from "./Pages/Orders/OrderHistoryPage"
+import OrderDetailPage from "./Pages/Orders/OrderDetailPage"
+import ProductDetailPage from "./Pages/Orders/ProductDetailPage"
+// Admin imports
+import AdminDashboard from "./Pages/Admin/AdminDashboard"
+import ProductsManagement from "./Pages/Admin/ProductsManagement"
+import OrdersManagement from "./Pages/Admin/OrdersManagement"
+import ProductForm from "./Pages/Admin/ProductForm"
+import AdminOrderDetailPage from "./Pages/Admin/OrderDetailPage"
+import Header from "./Components/Header"
 import { lazy, Suspense, useEffect, useState } from "react"
 import { AuthContextProvider, useAuth } from "./Context/AuthContextProvider"
+import { OrdersContextProvider } from "./Context/OrdersContextProvider"
+import { FeedbackProvider } from "./Context/FeedbackContext"
 import Preloader from "./Preloader"
 
 // Create a Not Found Page component
@@ -48,7 +63,37 @@ const ProtectedRoute = ({ children }) => {
     return <Navigate to="/login" />
   }
 
-  return children
+  return (
+    <>
+      <Header />
+      {children}
+    </>
+  )
+}
+
+// Admin Route component
+const AdminRoute = ({ children }) => {
+  const { userLoggedIn, loading, userDetails } = useAuth()
+
+  if (loading) {
+    return <Preloader />
+  }
+
+  if (!userLoggedIn) {
+    return <Navigate to="/login" />
+  }
+
+  // Check for admin role
+  if (!userDetails?.roles?.includes("admin")) {
+    return <Navigate to="/" />
+  }
+
+  return (
+    <>
+      <Header />
+      {children}
+    </>
+  )
 }
 
 function AppRoutes() {
@@ -69,6 +114,105 @@ function AppRoutes() {
           </ProtectedRoute>
         }
       />
+      <Route
+        path="/products"
+        element={
+          <ProtectedRoute>
+            <ProductsPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/cart"
+        element={
+          <ProtectedRoute>
+            <CartPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/order-summary"
+        element={
+          <ProtectedRoute>
+            <OrderSummaryPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/orders"
+        element={
+          <ProtectedRoute>
+            <OrderHistoryPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/orders/:orderId"
+        element={
+          <ProtectedRoute>
+            <OrderDetailPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/products/:productId"
+        element={
+          <ProtectedRoute>
+            <ProductDetailPage />
+          </ProtectedRoute>
+        }
+      />
+
+      {/* Admin Routes */}
+      <Route
+        path="/admin"
+        element={
+          <AdminRoute>
+            <AdminDashboard />
+          </AdminRoute>
+        }
+      />
+      <Route
+        path="/admin/products"
+        element={
+          <AdminRoute>
+            <ProductsManagement />
+          </AdminRoute>
+        }
+      />
+      <Route
+        path="/admin/orders"
+        element={
+          <AdminRoute>
+            <OrdersManagement />
+          </AdminRoute>
+        }
+      />
+      <Route
+        path="/admin/orders/:orderId"
+        element={
+          <AdminRoute>
+            <AdminOrderDetailPage />
+          </AdminRoute>
+        }
+      />
+      <Route
+        path="/admin/products/new"
+        element={
+          <AdminRoute>
+            <ProductForm />
+          </AdminRoute>
+        }
+      />
+      <Route
+        path="/admin/products/edit/:productId"
+        element={
+          <AdminRoute>
+            <ProductForm />
+          </AdminRoute>
+        }
+      />
+
       <Route path="/login" element={<LoginPage />} />
       <Route path="/signup" element={<SignupPage />} />
       <Route path="/forgot-password" element={<ForgotPasswordPage />} />
@@ -80,7 +224,11 @@ function App() {
   return (
     <BrowserRouter>
       <AuthContextProvider>
-        <AppRoutes />
+        <OrdersContextProvider>
+          <FeedbackProvider>
+            <AppRoutes />
+          </FeedbackProvider>
+        </OrdersContextProvider>
       </AuthContextProvider>
     </BrowserRouter>
   )

@@ -79,13 +79,13 @@ export const registerWithEmailAndPassword = async (email, password, displayName)
       password
     );
     const user = userCredential.user;
-    console.log("User created in auth.js:", user.uid);
-    const userData = {
+  console.log("User created in auth.js:", user.uid); const userData = {
       uid: user.uid,
       email: user.email || email, // Use user.email or fallback to input email
       displayName: displayName || "", // Changed from fullName to displayName
       userType: UserType.User,
       status: "active", // Default status for new users
+      roles: ["user"], // Default role is 'user', admins will have ['user', 'admin']
       createdAt: new Date().toISOString(),
     };
     console.log("Data to write to Firestore:", userData);    // Step 3: Store additional user data in Firestore

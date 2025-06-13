@@ -16,10 +16,7 @@ const compressionOptions = {
   initialQuality: 0.8,    // Start with 80% quality (adjustable)
 };
 
-export async function uploadImage(
-  file: File,
-  path: string
-): Promise<{ success: boolean; url?: string; error?: string }> {
+export async function uploadImage(file, path) {
   console.log("Original file:", file, "path:", path);
   console.log("Original file size:", (file.size / 1024 / 1024).toFixed(2), "MB");
 
@@ -67,7 +64,7 @@ export async function uploadImage(
 // Example usage:
 /*
 async function example() {
-  const fileInput = document.querySelector('input[type="file"]') as HTMLInputElement;
+  const fileInput = document.querySelector('input[type="file"]');
   if (fileInput.files?.[0]) {
     const result = await uploadImage(fileInput.files[0], "images/example.jpg");
     if (result.success) {
