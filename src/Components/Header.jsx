@@ -38,12 +38,14 @@ const Header = () => {
     )
   }
 
-  // User navigation items
-  const userNavigationItems = [
+  // Navigation items for all users
+  const publicNavigationItems = [
     { name: "Home", href: "/" },
     { name: "Products", href: "/products" },
-    { name: "Orders", href: "/orders" },
   ]
+
+  // Navigation items only for authenticated users
+  const authenticatedNavItems = [{ name: "Orders", href: "/orders" }]
 
   // Admin navigation (only shown to admins)
   const adminNavigationItems = [
@@ -51,17 +53,6 @@ const Header = () => {
     { name: "Manage Products", href: "/admin/products" },
     { name: "Manage Orders", href: "/admin/orders" },
   ]
-
-  // User profile dropdown items
-  const userMenuItems = [
-    { name: "Your Profile", onClick: () => navigate("/profile") },
-    { name: "Sign out", onClick: handleLogout },
-  ]
-
-  // If there's no authenticated user, return null
-  if (!currentUser && !loading) {
-    return null
-  }
 
   return (
     <header className="bg-white shadow-md">
@@ -74,7 +65,8 @@ const Header = () => {
 
             {/* Desktop menu */}
             <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
-              {userNavigationItems.map((item) => (
+              {/* Public navigation items */}
+              {publicNavigationItems.map((item) => (
                 <Link
                   key={item.href}
                   to={item.href}
@@ -88,7 +80,23 @@ const Header = () => {
                 </Link>
               ))}
 
-              {/* Show admin links only to users with admin role */}
+              {/* Authenticated navigation items - only shown when logged in */}
+              {currentUser &&
+                authenticatedNavItems.map((item) => (
+                  <Link
+                    key={item.href}
+                    to={item.href}
+                    className={`${
+                      isActive(item.href)
+                        ? "border-[var(--secondary-color)] text-gray-900"
+                        : "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700"
+                    } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium h-16`}
+                  >
+                    {item.name}
+                  </Link>
+                ))}
+
+              {/* Admin links - only shown to admin users */}
               {userDetails?.roles?.includes("admin") &&
                 adminNavigationItems.map((item) => (
                   <Link
@@ -134,50 +142,83 @@ const Header = () => {
               )}
             </Link>
 
-            {/* Profile dropdown */}
-            <div className="ml-3 relative">
-              <div>
-                <button
-                  type="button"
-                  className="bg-white rounded-full flex text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--secondary-color)]"
-                  id="user-menu-button"
-                  onClick={() => setIsProfileOpen(!isProfileOpen)}
-                >
-                  <span className="sr-only">Open user menu</span>
-                  <div className="h-8 w-8 rounded-full bg-[var(--secondary-color)] flex items-center justify-center text-white font-medium">
-                    {currentUser?.email?.charAt(0).toUpperCase() || "U"}
-                  </div>
-                </button>
-              </div>
+            {/* Profile dropdown or login/signup buttons */}
+            {currentUser ? (
+              <div className="ml-3 relative">
+                <div>
+                  <button
+                    type="button"
+                    className="bg-white rounded-full flex text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--secondary-color)]"
+                    id="user-menu-button"
+                    onClick={() => setIsProfileOpen(!isProfileOpen)}
+                  >
+                    <span className="sr-only">Open user menu</span>
+                    <div className="h-8 w-8 rounded-full bg-[var(--secondary-color)] flex items-center justify-center text-white font-medium">
+                      {currentUser?.email?.charAt(0).toUpperCase() || "U"}
+                    </div>
+                  </button>
+                </div>
 
-              {/* Profile dropdown menu */}
-              {isProfileOpen && (
-                <div
-                  className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-50"
-                  role="menu"
-                  aria-orientation="vertical"
-                  aria-labelledby="user-menu-button"
-                >
-                  <div className="px-4 py-2 text-xs text-gray-500">
-                    Signed in as
-                  </div>
-                  <div className="px-4 py-2 text-sm font-medium text-gray-900 border-b border-gray-100">
-                    {currentUser?.email}
-                  </div>
+                {/* Profile dropdown menu */}
+                {isProfileOpen && (
+                  <div
+                    className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-50"
+                    role="menu"
+                    aria-orientation="vertical"
+                    aria-labelledby="user-menu-button"
+                  >
+                    <div className="px-4 py-2 text-xs text-gray-500">
+                      Signed in as
+                    </div>
+                    <div className="px-4 py-2 text-sm font-medium text-gray-900 border-b border-gray-100">
+                      {currentUser?.email}
+                    </div>
 
-                  {userMenuItems.map((item, index) => (
                     <a
-                      key={index}
-                      onClick={item.onClick}
+                      onClick={() => navigate("/profile")}
                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
                       role="menuitem"
                     >
-                      {item.name}
+                      Your Profile
                     </a>
-                  ))}
-                </div>
-              )}
-            </div>
+
+                    {userDetails?.roles?.includes("admin") && (
+                      <a
+                        onClick={() => navigate("/admin")}
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
+                        role="menuitem"
+                      >
+                        Admin Dashboard
+                      </a>
+                    )}
+
+                    <a
+                      onClick={handleLogout}
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
+                      role="menuitem"
+                    >
+                      Sign out
+                    </a>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <div className="ml-3 flex items-center space-x-4">
+                <Link
+                  to="/login"
+                  state={{ from: location.pathname }}
+                  className="text-gray-500 hover:text-gray-700 font-medium text-sm"
+                >
+                  Sign in
+                </Link>
+                <Link
+                  to="/signup"
+                  className="bg-[var(--secondary-color)] text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-opacity-90"
+                >
+                  Sign up
+                </Link>
+              </div>
+            )}
           </div>
 
           {/* Mobile menu button */}
@@ -228,7 +269,8 @@ const Header = () => {
       {isMenuOpen && (
         <div className="sm:hidden">
           <div className="pt-2 pb-3 space-y-1">
-            {userNavigationItems.map((item) => (
+            {/* Public navigation items */}
+            {publicNavigationItems.map((item) => (
               <Link
                 key={item.href}
                 to={item.href}
@@ -241,7 +283,24 @@ const Header = () => {
                 {item.name}
               </Link>
             ))}
-            {/* Show admin links only to users with admin role */}
+
+            {/* Authenticated navigation items - only shown when logged in */}
+            {currentUser &&
+              authenticatedNavItems.map((item) => (
+                <Link
+                  key={item.href}
+                  to={item.href}
+                  className={`${
+                    isActive(item.href)
+                      ? "bg-[var(--secondary-color-light)] border-[var(--secondary-color)] text-[var(--secondary-color)]"
+                      : "border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700"
+                  } block pl-3 pr-4 py-2 border-l-4 text-base font-medium`}
+                >
+                  {item.name}
+                </Link>
+              ))}
+
+            {/* Admin links - only shown to admin users */}
             {userDetails?.roles?.includes("admin") &&
               adminNavigationItems.map((item) => (
                 <Link
@@ -256,7 +315,8 @@ const Header = () => {
                   {item.name}
                 </Link>
               ))}
-            {/* Mobile cart link */}{" "}
+
+            {/* Mobile cart link */}
             <Link
               to="/cart"
               className={`${
@@ -288,35 +348,68 @@ const Header = () => {
             </Link>
           </div>
 
-          {/* Mobile profile section */}
-          <div className="pt-4 pb-3 border-t border-gray-200">
-            <div className="flex items-center px-4">
-              <div className="flex-shrink-0">
-                <div className="h-10 w-10 rounded-full bg-[var(--secondary-color)] flex items-center justify-center text-white font-medium">
-                  {currentUser?.email?.charAt(0).toUpperCase() || "U"}
+          {/* Mobile profile section or login/signup buttons */}
+          {currentUser ? (
+            <div className="pt-4 pb-3 border-t border-gray-200">
+              <div className="flex items-center px-4">
+                <div className="flex-shrink-0">
+                  <div className="h-10 w-10 rounded-full bg-[var(--secondary-color)] flex items-center justify-center text-white font-medium">
+                    {currentUser?.email?.charAt(0).toUpperCase() || "U"}
+                  </div>
+                </div>
+                <div className="ml-3">
+                  <div className="text-base font-medium text-gray-800">
+                    {userDetails?.displayName || "User"}
+                  </div>
+                  <div className="text-sm font-medium text-gray-500 truncate max-w-[200px]">
+                    {currentUser?.email}
+                  </div>
                 </div>
               </div>
-              <div className="ml-3">
-                <div className="text-base font-medium text-gray-800">
-                  {userDetails?.displayName || "User"}
-                </div>
-                <div className="text-sm font-medium text-gray-500 truncate max-w-[200px]">
-                  {currentUser?.email}
-                </div>
-              </div>
-            </div>
-            <div className="mt-3 space-y-1">
-              {userMenuItems.map((item, index) => (
+              <div className="mt-3 space-y-1">
                 <a
-                  key={index}
-                  onClick={item.onClick}
+                  onClick={() => navigate("/profile")}
                   className="block px-4 py-2 text-base font-medium text-gray-500 hover:text-gray-800 hover:bg-gray-100 cursor-pointer"
                 >
-                  {item.name}
+                  Your Profile
                 </a>
-              ))}
+
+                {userDetails?.roles?.includes("admin") && (
+                  <a
+                    onClick={() => navigate("/admin")}
+                    className="block px-4 py-2 text-base font-medium text-gray-500 hover:text-gray-800 hover:bg-gray-100 cursor-pointer"
+                  >
+                    Admin Dashboard
+                  </a>
+                )}
+
+                <a
+                  onClick={handleLogout}
+                  className="block px-4 py-2 text-base font-medium text-gray-500 hover:text-gray-800 hover:bg-gray-100 cursor-pointer"
+                >
+                  Sign out
+                </a>
+              </div>
             </div>
-          </div>
+          ) : (
+            <div className="pt-4 pb-3 border-t border-gray-200">
+              <div className="space-y-1 px-4">
+                <Link
+                  to="/login"
+                  state={{ from: location.pathname }}
+                  className="block px-4 py-2 text-base font-medium text-[var(--secondary-color)] hover:bg-gray-100 rounded-md"
+                >
+                  Sign in
+                </Link>
+                <Link
+                  to="/signup"
+                  className="block px-4 py-2 text-base font-medium text-white bg-[var(--secondary-color)] rounded-md hover:bg-opacity-90"
+                >
+                  Sign up
+                </Link>
+              </div>
+            </div>
+          )}
         </div>
       )}
     </header>

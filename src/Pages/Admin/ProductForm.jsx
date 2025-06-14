@@ -5,219 +5,231 @@ import { useFeedback } from '../../Context/FeedbackContext';
 import AdminNavigation from './AdminNavigation';
 import LoadingSpinner from '../../Components/LoadingSpinner';
 import ErrorDisplay from '../../Components/ErrorDisplay';
-import { collection, getDocs, query } from 'firebase/firestore';
-import { db } from '../../Firebase/firebase';
-import { addProduct, updateProduct, getProductById } from '../../Firebase/productService';
+import PageContainer from "../../Components/PageContainer"
+import { collection, getDocs, query } from "firebase/firestore"
+import { db } from "../../Firebase/firebase"
+import {
+  addProduct,
+  updateProduct,
+  getProductById,
+} from "../../Firebase/productService"
 
 const ProductForm = () => {
-  const { productId } = useParams();
-  const isEditMode = Boolean(productId);
-  
-  const [loading, setLoading] = useState(true);
-  const [submitLoading, setSubmitLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const [existingCategories, setExistingCategories] = useState([]);
-  
+  const { productId } = useParams()
+  const isEditMode = Boolean(productId)
+
+  const [loading, setLoading] = useState(true)
+  const [submitLoading, setSubmitLoading] = useState(false)
+  const [error, setError] = useState(null)
+  const [existingCategories, setExistingCategories] = useState([])
+
   const [formData, setFormData] = useState({
-    name: '',
-    description: '',
-    price: '',
-    category: '',
-    imageUrl: '',
-    stockQuantity: '100',
+    name: "",
+    description: "",
+    price: "",
+    category: "",
+    imageUrl: "",
+    stockQuantity: "100",
     features: [],
-    specs: {}
-  });
-  
-  const [imagePreview, setImagePreview] = useState('');
-  const [imageFile, setImageFile] = useState(null);
-  const [currentFeature, setCurrentFeature] = useState('');
-  const [specKey, setSpecKey] = useState('');
-  const [specValue, setSpecValue] = useState('');
-  
-  const navigate = useNavigate();
-  const { currentUser, userDetails } = useAuth();
-  const feedback = useFeedback();
-  
+    specs: {},
+  })
+
+  const [imagePreview, setImagePreview] = useState("")
+  const [imageFile, setImageFile] = useState(null)
+  const [currentFeature, setCurrentFeature] = useState("")
+  const [specKey, setSpecKey] = useState("")
+  const [specValue, setSpecValue] = useState("")
+
+  const navigate = useNavigate()
+  const { currentUser, userDetails } = useAuth()
+  const feedback = useFeedback()
+
   // Check if user is admin
   useEffect(() => {
     const checkAdminStatus = async () => {
       if (!currentUser) {
-        navigate('/login');
-        return;
+        navigate("/login")
+        return
       }
-      
+
       // Check if user has admin role
-      if (!userDetails?.roles?.includes('admin')) {
-        navigate('/');
-        return;
+      if (!userDetails?.roles?.includes("admin")) {
+        navigate("/")
+        return
       }
-    };
-    
-    checkAdminStatus();
-  }, [currentUser, userDetails, navigate]);
-  
+    }
+
+    checkAdminStatus()
+  }, [currentUser, userDetails, navigate])
+
   // Fetch existing categories
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const productsRef = collection(db, "products");
-        const querySnapshot = await getDocs(query(productsRef));
-        
-        const categories = new Set();
-        querySnapshot.docs.forEach(doc => {
-          const category = doc.data().category;
+        const productsRef = collection(db, "products")
+        const querySnapshot = await getDocs(query(productsRef))
+
+        const categories = new Set()
+        querySnapshot.docs.forEach((doc) => {
+          const category = doc.data().category
           if (category) {
-            categories.add(category);
+            categories.add(category)
           }
-        });
-        
-        setExistingCategories(Array.from(categories));
+        })
+
+        setExistingCategories(Array.from(categories))
       } catch (error) {
-        console.error("Error fetching categories:", error);
+        console.error("Error fetching categories:", error)
       }
-    };
-    
-    fetchCategories();
-  }, []);
-    // Fetch product data if in edit mode
+    }
+
+    fetchCategories()
+  }, [])
+  // Fetch product data if in edit mode
   useEffect(() => {
     const fetchProduct = async () => {
       if (!isEditMode) {
-        setLoading(false);
-        return;
+        setLoading(false)
+        return
       }
-      
+
       try {
-        setLoading(true);
-        const product = await getProductById(productId);
-        
+        setLoading(true)
+        const product = await getProductById(productId)
+
         if (product) {
           // Format the data for the form
           setFormData({
-            name: product.name || '',
-            description: product.description || '',
-            price: product.price ? product.price.toString() : '',
-            category: product.category || '',
-            imageUrl: product.imageUrl || '',
-            stockQuantity: product.stockQuantity ? product.stockQuantity.toString() : '100',
+            name: product.name || "",
+            description: product.description || "",
+            price: product.price ? product.price.toString() : "",
+            category: product.category || "",
+            imageUrl: product.imageUrl || "",
+            stockQuantity: product.stockQuantity
+              ? product.stockQuantity.toString()
+              : "100",
             features: product.features || [],
-            specs: product.specs || {}
-          });
-          
+            specs: product.specs || {},
+          })
+
           if (product.imageUrl) {
-            setImagePreview(product.imageUrl);
+            setImagePreview(product.imageUrl)
           }
         } else {
-          setError(new Error("Product not found"));
+          setError(new Error("Product not found"))
         }
       } catch (error) {
-        console.error("Error fetching product:", error);
-        setError(error);
+        console.error("Error fetching product:", error)
+        setError(error)
       } finally {
-        setLoading(false);
+        setLoading(false)
       }
-    };
-    
-    if (currentUser && userDetails?.roles?.includes('admin')) {
-      fetchProduct();
     }
-  }, [isEditMode, productId, currentUser, userDetails]);
-  
+
+    if (currentUser && userDetails?.roles?.includes("admin")) {
+      fetchProduct()
+    }
+  }, [isEditMode, productId, currentUser, userDetails])
+
   // Handle form input changes
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    
-    if (name === 'price' || name === 'stockQuantity') {
+    const { name, value } = e.target
+
+    if (name === "price" || name === "stockQuantity") {
       // Allow only numbers and decimal point for price
-      const regex = name === 'price' ? /^[0-9]*\.?[0-9]*$/ : /^[0-9]*$/;
-      if (value === '' || regex.test(value)) {
-        setFormData({ ...formData, [name]: value });
+      const regex = name === "price" ? /^[0-9]*\.?[0-9]*$/ : /^[0-9]*$/
+      if (value === "" || regex.test(value)) {
+        setFormData({ ...formData, [name]: value })
       }
     } else {
-      setFormData({ ...formData, [name]: value });
+      setFormData({ ...formData, [name]: value })
     }
-  };
-  
+  }
+
   // Handle image file selection
   const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    if (!file) return;
-    
+    const file = e.target.files[0]
+    if (!file) return
+
     // Check file type
-    if (!file.type.match('image.*')) {
-      feedback.showError('Please select an image file');
-      return;
+    if (!file.type.match("image.*")) {
+      feedback.showError("Please select an image file")
+      return
     }
-    
+
     // Check file size (max 5MB)
     if (file.size > 5 * 1024 * 1024) {
-      feedback.showError('Image size should not exceed 5MB');
-      return;
+      feedback.showError("Image size should not exceed 5MB")
+      return
     }
-    
-    setImageFile(file);
-    
+
+    setImageFile(file)
+
     // Create preview
-    const reader = new FileReader();
+    const reader = new FileReader()
     reader.onload = () => {
-      setImagePreview(reader.result);
-    };
-    reader.readAsDataURL(file);
-  };
-  
+      setImagePreview(reader.result)
+    }
+    reader.readAsDataURL(file)
+  }
+
   // Add a feature to the list
   const addFeature = () => {
-    if (currentFeature.trim() === '') return;
-    
+    if (currentFeature.trim() === "") return
+
     setFormData({
       ...formData,
-      features: [...formData.features, currentFeature.trim()]
-    });
-    setCurrentFeature('');
-  };
-  
+      features: [...formData.features, currentFeature.trim()],
+    })
+    setCurrentFeature("")
+  }
+
   // Remove a feature from the list
   const removeFeature = (index) => {
-    const updatedFeatures = [...formData.features];
-    updatedFeatures.splice(index, 1);
-    setFormData({ ...formData, features: updatedFeatures });
-  };
-  
+    const updatedFeatures = [...formData.features]
+    updatedFeatures.splice(index, 1)
+    setFormData({ ...formData, features: updatedFeatures })
+  }
+
   // Add a specification
   const addSpec = () => {
-    if (specKey.trim() === '' || specValue.trim() === '') return;
-    
+    if (specKey.trim() === "" || specValue.trim() === "") return
+
     setFormData({
       ...formData,
       specs: {
         ...formData.specs,
-        [specKey.trim()]: specValue.trim()
-      }
-    });
-    setSpecKey('');
-    setSpecValue('');
-  };
-  
+        [specKey.trim()]: specValue.trim(),
+      },
+    })
+    setSpecKey("")
+    setSpecValue("")
+  }
+
   // Remove a specification
   const removeSpec = (key) => {
-    const updatedSpecs = { ...formData.specs };
-    delete updatedSpecs[key];
-    setFormData({ ...formData, specs: updatedSpecs });
-  };
-    // Submit the form
+    const updatedSpecs = { ...formData.specs }
+    delete updatedSpecs[key]
+    setFormData({ ...formData, specs: updatedSpecs })
+  }
+  // Submit the form
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    
+    e.preventDefault()
+
     // Basic validation
-    if (!formData.name.trim() || !formData.description.trim() || !formData.price || !formData.category.trim()) {
-      feedback.showError('Please fill all required fields');
-      return;
+    if (
+      !formData.name.trim() ||
+      !formData.description.trim() ||
+      !formData.price ||
+      !formData.category.trim()
+    ) {
+      feedback.showError("Please fill all required fields")
+      return
     }
-    
+
     try {
-      setSubmitLoading(true);
-      
+      setSubmitLoading(true)
+
       // Create product object
       const productData = {
         name: formData.name.trim(),
@@ -226,77 +238,83 @@ const ProductForm = () => {
         category: formData.category.trim(),
         stockQuantity: parseInt(formData.stockQuantity, 10) || 100,
         features: formData.features,
-        specs: formData.specs
-      };
-      
+        specs: formData.specs,
+      }
+
       if (isEditMode) {
         // If we already have an image URL and no new file, keep the existing URL
         if (formData.imageUrl && !imageFile) {
-          productData.imageUrl = formData.imageUrl;
+          productData.imageUrl = formData.imageUrl
         }
-        
+
         // Update existing product
-        await updateProduct(productId, productData, imageFile);
-        feedback.showSuccess('Product updated successfully');
+        await updateProduct(productId, productData, imageFile)
+        feedback.showSuccess("Product updated successfully")
       } else {
         // Create new product
-        await addProduct(productData, imageFile);
-        feedback.showSuccess('Product created successfully');
+        await addProduct(productData, imageFile)
+        feedback.showSuccess("Product created successfully")
       }
-      
+
       // Redirect to products list
-      navigate('/admin/products');
-      
+      navigate("/admin/products")
     } catch (error) {
-      console.error("Error saving product:", error);
-      feedback.showError(`Failed to save product: ${error.message}`);
+      console.error("Error saving product:", error)
+      feedback.showError(`Failed to save product: ${error.message}`)
     } finally {
-      setSubmitLoading(false);
+      setSubmitLoading(false)
     }
-  };
-  
+  }
+
   // Cancel and go back
   const handleCancel = () => {
-    navigate('/admin/products');
-  };
-  
-  if (loading) {
-    return <LoadingSpinner fullScreen message={isEditMode ? "Loading product..." : "Loading..."} />;
+    navigate("/admin/products")
   }
-  
+  if (loading) {
+    return (
+      <PageContainer>
+        <LoadingSpinner
+          fullScreen
+          message={isEditMode ? "Loading product..." : "Loading..."}
+        />
+      </PageContainer>
+    )
+  }
+
   if (error) {
     return (
-      <div className="min-h-screen bg-gray-50 py-8">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <ErrorDisplay 
-            error={error} 
-            fullScreen 
-            reset={() => navigate('/admin/products')} 
-          />
-        </div>
-      </div>
-    );
+      <PageContainer>
+        <ErrorDisplay
+          error={error}
+          fullScreen
+          reset={() => navigate("/admin/products")}
+        />
+      </PageContainer>
+    )
   }
-  
+
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="bg-[var(--secondary-color)] text-white shadow-md">
+    <PageContainer className="pt-0" fullWidth={false} bgColor="bg-gray-50">
+      <div className="bg-[var(--secondary-color)] text-white shadow-md -mx-4 sm:-mx-6 lg:-mx-8 mb-6">
         <div className="container mx-auto py-4 px-4 sm:px-6 lg:px-8">
           <h1 className="text-2xl font-bold">
-            {isEditMode ? 'Edit Product' : 'Add New Product'}
+            {isEditMode ? "Edit Product" : "Add New Product"}
           </h1>
         </div>
       </div>
-      
+
       <AdminNavigation />
-      
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+      <div className="py-8">
         <div className="bg-white shadow rounded-lg overflow-hidden">
           <form onSubmit={handleSubmit} className="p-6">
             <div className="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
               {/* Product Name */}
               <div className="sm:col-span-6">
-                <label htmlFor="name" className="block text-sm font-medium text-gray-700">
+                <label
+                  htmlFor="name"
+                  className="block text-sm font-medium text-gray-700"
+                >
                   Product Name *
                 </label>
                 <div className="mt-1">
@@ -311,10 +329,13 @@ const ProductForm = () => {
                   />
                 </div>
               </div>
-              
+
               {/* Description */}
               <div className="sm:col-span-6">
-                <label htmlFor="description" className="block text-sm font-medium text-gray-700">
+                <label
+                  htmlFor="description"
+                  className="block text-sm font-medium text-gray-700"
+                >
                   Description *
                 </label>
                 <div className="mt-1">
@@ -329,10 +350,13 @@ const ProductForm = () => {
                   />
                 </div>
               </div>
-              
+
               {/* Price */}
               <div className="sm:col-span-3">
-                <label htmlFor="price" className="block text-sm font-medium text-gray-700">
+                <label
+                  htmlFor="price"
+                  className="block text-sm font-medium text-gray-700"
+                >
                   Price ($) *
                 </label>
                 <div className="mt-1 relative rounded-md shadow-sm">
@@ -352,10 +376,13 @@ const ProductForm = () => {
                   />
                 </div>
               </div>
-              
+
               {/* Stock Quantity */}
               <div className="sm:col-span-3">
-                <label htmlFor="stockQuantity" className="block text-sm font-medium text-gray-700">
+                <label
+                  htmlFor="stockQuantity"
+                  className="block text-sm font-medium text-gray-700"
+                >
                   Stock Quantity
                 </label>
                 <div className="mt-1">
@@ -370,10 +397,13 @@ const ProductForm = () => {
                   />
                 </div>
               </div>
-              
+
               {/* Category */}
               <div className="sm:col-span-3">
-                <label htmlFor="category" className="block text-sm font-medium text-gray-700">
+                <label
+                  htmlFor="category"
+                  className="block text-sm font-medium text-gray-700"
+                >
                   Category *
                 </label>
                 <div className="mt-1">
@@ -407,12 +437,14 @@ const ProductForm = () => {
                     />
                   )}
                 </div>
-                {formData.category === 'other' && (
+                {formData.category === "other" && (
                   <div className="mt-2">
                     <input
                       type="text"
                       name="category"
-                      value={formData.category === 'other' ? '' : formData.category}
+                      value={
+                        formData.category === "other" ? "" : formData.category
+                      }
                       onChange={handleChange}
                       required
                       className="block w-full rounded-md border-gray-300 shadow-sm focus:border-[var(--secondary-color)] focus:ring-[var(--secondary-color)] sm:text-sm"
@@ -421,7 +453,7 @@ const ProductForm = () => {
                   </div>
                 )}
               </div>
-              
+
               {/* Product Image */}
               <div className="sm:col-span-6">
                 <label className="block text-sm font-medium text-gray-700">
@@ -430,31 +462,53 @@ const ProductForm = () => {
                 <div className="mt-1 flex items-center">
                   {imagePreview ? (
                     <div className="relative">
-                      <img 
-                        src={imagePreview} 
-                        alt="Preview" 
+                      <img
+                        src={imagePreview}
+                        alt="Preview"
                         className="h-32 w-32 object-cover rounded-md"
                       />
                       <button
                         type="button"
                         onClick={() => {
-                          setImagePreview('');
-                          setImageFile(null);
+                          setImagePreview("")
+                          setImageFile(null)
                           if (!isEditMode) {
-                            setFormData({ ...formData, imageUrl: '' });
+                            setFormData({ ...formData, imageUrl: "" })
                           }
                         }}
                         className="absolute top-0 right-0 bg-red-600 text-white rounded-full p-1"
                       >
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-4 w-4"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M6 18L18 6M6 6l12 12"
+                          />
                         </svg>
                       </button>
                     </div>
                   ) : (
                     <div className="h-32 w-32 border-2 border-gray-300 border-dashed rounded-md flex items-center justify-center">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-8 w-8 text-gray-400"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
+                        />
                       </svg>
                     </div>
                   )}
@@ -482,7 +536,7 @@ const ProductForm = () => {
                   </div>
                 </div>
               </div>
-              
+
               {/* Features */}
               <div className="sm:col-span-6">
                 <label className="block text-sm font-medium text-gray-700">
@@ -507,13 +561,14 @@ const ProductForm = () => {
                 <div className="mt-2">
                   {formData.features.length === 0 ? (
                     <p className="text-sm text-gray-500">
-                      No features added yet. Add some features to highlight product capabilities.
+                      No features added yet. Add some features to highlight
+                      product capabilities.
                     </p>
                   ) : (
                     <div className="flex flex-wrap gap-2">
                       {formData.features.map((feature, index) => (
-                        <div 
-                          key={index} 
+                        <div
+                          key={index}
                           className="bg-blue-100 text-blue-800 text-sm px-3 py-1 rounded-full flex items-center"
                         >
                           <span>{feature}</span>
@@ -522,8 +577,19 @@ const ProductForm = () => {
                             onClick={() => removeFeature(index)}
                             className="ml-1 rounded-full focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-[var(--secondary-color)]"
                           >
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-blue-800" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              className="h-4 w-4 text-blue-800"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              stroke="currentColor"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M6 18L18 6M6 6l12 12"
+                              />
                             </svg>
                           </button>
                         </div>
@@ -532,7 +598,7 @@ const ProductForm = () => {
                   )}
                 </div>
               </div>
-              
+
               {/* Specifications */}
               <div className="sm:col-span-6">
                 <label className="block text-sm font-medium text-gray-700">
@@ -566,23 +632,42 @@ const ProductForm = () => {
                 <div className="mt-4">
                   {Object.keys(formData.specs).length === 0 ? (
                     <p className="text-sm text-gray-500">
-                      No specifications added yet. Add technical details about your product.
+                      No specifications added yet. Add technical details about
+                      your product.
                     </p>
                   ) : (
                     <dl className="grid grid-cols-1 gap-x-4 gap-y-6 sm:grid-cols-2">
                       {Object.entries(formData.specs).map(([key, value]) => (
-                        <div key={key} className="border border-gray-200 rounded-md p-3 bg-gray-50 relative">
+                        <div
+                          key={key}
+                          className="border border-gray-200 rounded-md p-3 bg-gray-50 relative"
+                        >
                           <button
                             type="button"
                             onClick={() => removeSpec(key)}
                             className="absolute top-1 right-1 rounded-full p-1 text-gray-400 hover:text-gray-500"
                           >
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              className="h-4 w-4"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              stroke="currentColor"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M6 18L18 6M6 6l12 12"
+                              />
                             </svg>
                           </button>
-                          <dt className="text-sm font-medium text-gray-500">{key}</dt>
-                          <dd className="mt-1 text-sm text-gray-900">{value}</dd>
+                          <dt className="text-sm font-medium text-gray-500">
+                            {key}
+                          </dt>
+                          <dd className="mt-1 text-sm text-gray-900">
+                            {value}
+                          </dd>
                         </div>
                       ))}
                     </dl>
@@ -590,7 +675,7 @@ const ProductForm = () => {
                 </div>
               </div>
             </div>
-            
+
             <div className="mt-8 flex justify-end">
               <button
                 type="button"
@@ -606,22 +691,40 @@ const ProductForm = () => {
               >
                 {submitLoading ? (
                   <span className="flex items-center">
-                    <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    <svg
+                      className="animate-spin -ml-1 mr-2 h-4 w-4 text-white"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                    >
+                      <circle
+                        className="opacity-25"
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="currentColor"
+                        strokeWidth="4"
+                      ></circle>
+                      <path
+                        className="opacity-75"
+                        fill="currentColor"
+                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                      ></path>
                     </svg>
                     <span>Saving...</span>
                   </span>
                 ) : (
-                  <span>{isEditMode ? 'Update Product' : 'Create Product'}</span>
-                )}
-              </button>
+                  <span>
+                    {isEditMode ? "Update Product" : "Create Product"}
+                  </span>
+                )}{" "}
+              </button>{" "}
             </div>
           </form>
         </div>
       </div>
-    </div>
-  );
-};
+    </PageContainer>
+  )
+}
 
 export default ProductForm;

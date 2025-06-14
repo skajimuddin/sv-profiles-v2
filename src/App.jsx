@@ -51,7 +51,7 @@ const NotFoundPage = () => {
   )
 }
 
-// Protected Route component
+// Protected Route component for routes that require authentication
 const ProtectedRoute = ({ children }) => {
   const { userLoggedIn, loading } = useAuth()
 
@@ -60,7 +60,24 @@ const ProtectedRoute = ({ children }) => {
   }
 
   if (!userLoggedIn) {
-    return <Navigate to="/login" />
+    // Save the intended destination for redirect after login
+    return <Navigate to="/login" state={{ from: window.location.pathname }} />
+  }
+
+  return (
+    <>
+      <Header />
+      {children}
+    </>
+  )
+}
+
+// Public Route with Header component
+const PublicRouteWithHeader = ({ children }) => {
+  const { loading } = useAuth()
+
+  if (loading) {
+    return <Preloader />
   }
 
   return (
@@ -80,7 +97,7 @@ const AdminRoute = ({ children }) => {
   }
 
   if (!userLoggedIn) {
-    return <Navigate to="/login" />
+    return <Navigate to="/login" state={{ from: window.location.pathname }} />
   }
 
   // Check for admin role
@@ -102,32 +119,39 @@ function AppRoutes() {
   if (loading) {
     return <Preloader />
   }
-
   return (
     <Routes>
       <Route path="*" element={<NotFoundPage />} />
       <Route
         path="/"
         element={
-          <ProtectedRoute>
+          <PublicRouteWithHeader>
             <HomePage />
-          </ProtectedRoute>
+          </PublicRouteWithHeader>
         }
       />
       <Route
         path="/products"
         element={
-          <ProtectedRoute>
+          <PublicRouteWithHeader>
             <ProductsPage />
-          </ProtectedRoute>
+          </PublicRouteWithHeader>
+        }
+      />
+      <Route
+        path="/products/:productId"
+        element={
+          <PublicRouteWithHeader>
+            <ProductDetailPage />
+          </PublicRouteWithHeader>
         }
       />
       <Route
         path="/cart"
         element={
-          <ProtectedRoute>
+          <PublicRouteWithHeader>
             <CartPage />
-          </ProtectedRoute>
+          </PublicRouteWithHeader>
         }
       />
       <Route
@@ -151,14 +175,6 @@ function AppRoutes() {
         element={
           <ProtectedRoute>
             <OrderDetailPage />
-          </ProtectedRoute>
-        }
-      />
-      <Route
-        path="/products/:productId"
-        element={
-          <ProtectedRoute>
-            <ProductDetailPage />
           </ProtectedRoute>
         }
       />

@@ -6,33 +6,29 @@ import OrdersNavigation from './OrdersNavigation';
 import LoadingSpinner from '../../Components/LoadingSpinner';
 import ProductSkeleton from '../../Components/ProductSkeleton';
 import ErrorDisplay from '../../Components/ErrorDisplay';
-import { formatCurrency } from "../../utils/razorpayLoader"
-import PageContainer from "../../Components/PageContainer"
+import { formatCurrency } from "../../utils/razorpayLoader";
+import PageContainer from '../../Components/PageContainer';
 
 const ProductsPage = () => {
-  const [products, setProducts] = useState([])
-  const [filteredProducts, setFilteredProducts] = useState([])
-  const [categories, setCategories] = useState([])
-  const [selectedCategory, setSelectedCategory] = useState("all")
-  const [searchTerm, setSearchTerm] = useState("")
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(null)
-  const navigate = useNavigate()
-  const { userLoggedIn } = useAuth()
-  const { cart, addToCart, getCartCount } = useOrders()
-
+  const [products, setProducts] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState("all");
+  const [searchTerm, setSearchTerm] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const navigate = useNavigate();
+  const { userLoggedIn } = useAuth();
+  const { cart, addToCart } = useOrders();
+  
   // Fetch products on component mount
   useEffect(() => {
     // In the future, this would fetch from Firebase
     const fetchProducts = async () => {
       try {
-        setLoading(true)
-        setError(null)
-
-        // In a real app, this would be an API call with proper error handling
-        // For example: const response = await fetch('/api/products');
-        // const data = await response.json();
-
+        setLoading(true);
+        setError(null);
+        
         // Simulate API call
         return new Promise((resolve) => {
           setTimeout(() => {
@@ -118,94 +114,90 @@ const ProductsPage = () => {
                   "https://images.unsplash.com/photo-1558089687-f282ffcbc0d3?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c21hcnQlMjBob21lfGVufDB8fDB8fHww",
                 category: "electronics",
               },
-            ]
-
+            ];
+            
             // Extract unique categories from products
-            const uniqueCategories = [
-              ...new Set(mockProducts.map((product) => product.category)),
-            ]
-            setCategories(uniqueCategories)
-
-            resolve(mockProducts)
-          }, 800) // Simulate loading delay
-        })
+            const uniqueCategories = [...new Set(mockProducts.map(product => product.category))];
+            setCategories(uniqueCategories);
+            
+            resolve(mockProducts);
+          }, 800); // Simulate loading delay
+        });
       } catch (error) {
-        console.error("Error fetching products:", error)
-        setError(error)
-        throw error
+        console.error("Error fetching products:", error);
+        setError(error);
+        throw error;
       }
-    }
-
+    };
+    
     // Execute the async function
     fetchProducts()
       .then((mockProducts) => {
-        setProducts(mockProducts)
-        setFilteredProducts(mockProducts)
+        setProducts(mockProducts);
+        setFilteredProducts(mockProducts);
       })
       .catch((error) => {
-        console.error("Error in fetchProducts:", error)
-        setError(error)
+        console.error("Error in fetchProducts:", error);
+        setError(error);
       })
       .finally(() => {
-        setLoading(false)
-      })
-  }, [])
-
+        setLoading(false);
+      });
+  }, []);
+  
   // Filter products by search term and category
   const filterProducts = () => {
-    let filtered = products
-
+    let filtered = products;
+    
     // Apply category filter if not "all"
-    if (selectedCategory !== "all") {
-      filtered = filtered.filter(
-        (product) => product.category === selectedCategory
-      )
+    if (selectedCategory !== 'all') {
+      filtered = filtered.filter(product => product.category === selectedCategory);
     }
-
+    
     // Apply search term filter if there is one
-    if (searchTerm.trim() !== "") {
-      const searchLower = searchTerm.toLowerCase()
-      filtered = filtered.filter(
-        (product) =>
-          product.name.toLowerCase().includes(searchLower) ||
-          product.description.toLowerCase().includes(searchLower)
-      )
+    if (searchTerm.trim() !== '') {
+      const searchLower = searchTerm.toLowerCase();
+      filtered = filtered.filter(product => 
+        product.name.toLowerCase().includes(searchLower) || 
+        product.description.toLowerCase().includes(searchLower)
+      );
     }
-
-    setFilteredProducts(filtered)
-  }
-
+    
+    setFilteredProducts(filtered);
+  };
+  
   // Effect to filter products when search term or category changes
   useEffect(() => {
     if (products.length > 0) {
-      filterProducts()
+      filterProducts();
     }
-  }, [searchTerm, selectedCategory, products])
-
+  }, [searchTerm, selectedCategory, products]);
+  
   // Filter products by category
   const filterByCategory = (category) => {
-    setSelectedCategory(category)
-  }
-
+    setSelectedCategory(category);
+  };
+  
   const viewCart = () => {
-    navigate("/cart")
-  }
-
+    navigate('/cart');
+  };
+  
   // Handle retry after error
   const handleRetry = () => {
-    window.location.reload()
-  }
+    window.location.reload();
+  };
+  
   if (loading) {
     return (
       <>
         {/* Header */}
         <div className="bg-[var(--secondary-color)] text-white shadow-md">
-          <div className="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8 flex justify-between items-center">
+          <div className="container max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8 flex justify-between items-center">
             <h1 className="text-xl sm:text-2xl font-bold">Our Products</h1>
             <div className="w-8 h-8"></div>
           </div>
         </div>
-
+        
         <PageContainer className="py-8">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
             {[...Array(6)].map((_, index) => (
@@ -214,23 +206,24 @@ const ProductsPage = () => {
           </div>
         </PageContainer>
       </>
-    )
+    );
   }
+  
   if (error) {
     return (
       <PageContainer className="py-8 flex flex-col items-center justify-center">
         <div className="w-full max-w-lg mx-auto">
           <ErrorDisplay error={error} reset={handleRetry} fullScreen={true} />
-
+          
           <div className="mt-8 text-center">
             <h2 className="text-xl font-bold text-gray-800">
               Something went wrong
             </h2>
             <p className="mt-2 text-gray-600">
-              We are unable to load the products at this moment. Please try
-              again later.
+              We are unable to load the products at this moment. Please try again
+              later.
             </p>
-
+            
             <button
               onClick={handleRetry}
               className="mt-4 px-4 py-2 bg-[var(--secondary-color)] text-white rounded-md hover:bg-[#162d4d] transition-colors"
@@ -240,12 +233,13 @@ const ProductsPage = () => {
           </div>
         </div>
       </PageContainer>
-    )
+    );
   }
+  
   return (
-    <PageContainer fullWidth>
+    <>
       {/* Header */}
-      <div className="bg-[var(--secondary-color)] text-white shadow-md w-full">
+      <div className="bg-[var(--secondary-color)] text-white shadow-md">
         <div className="container max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8 flex justify-between items-center">
           <h1 className="text-xl sm:text-2xl font-bold">Our Products</h1>
           <button
@@ -272,11 +266,13 @@ const ProductsPage = () => {
           </button>
         </div>
       </div>
+
       {/* Orders Navigation */}
       <OrdersNavigation />
+
       {/* Search and Category filters */}
       <div className="bg-gray-50 py-4 border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Search Bar */}
           <div className="mb-4">
             <div className="flex w-full max-w-md mx-auto">
@@ -298,13 +294,13 @@ const ProductsPage = () => {
               </button>
             </div>
           </div>
-
+          
           {/* Category Filters */}
           <div className="flex flex-wrap items-center gap-2">
             <span className="text-sm font-medium text-gray-700 mr-2">
               Filter by:
             </span>
-
+            
             <button
               onClick={() => filterByCategory("all")}
               className={`px-3 py-1 text-sm rounded-full ${
@@ -315,7 +311,7 @@ const ProductsPage = () => {
             >
               All
             </button>
-
+            
             {categories.map((category) => (
               <button
                 key={category}
@@ -332,8 +328,9 @@ const ProductsPage = () => {
           </div>
         </div>
       </div>
-      {/* Products grid */}{" "}
-      <div className="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
+      
+      {/* Products grid */}
+      <PageContainer className="py-8">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
           {filteredProducts.length === 0 ? (
             <div className="col-span-full py-16 text-center">
@@ -376,24 +373,24 @@ const ProductsPage = () => {
                   className="w-full h-48 object-cover cursor-pointer"
                   onClick={() => navigate(`/products/${product.id}`)}
                 />
-                <div className="p-6">
+                <div className="p-4 sm:p-6">
                   <h2
-                    className="text-xl font-bold mb-2 text-[var(--secondary-color)] cursor-pointer hover:underline"
+                    className="text-lg sm:text-xl font-bold mb-2 text-[var(--secondary-color)] cursor-pointer hover:underline truncate"
                     onClick={() => navigate(`/products/${product.id}`)}
                   >
                     {product.name}
                   </h2>
-                  <p className="text-gray-600 mb-4">
-                    {product.description.substring(0, 80)}...
+                  <p className="text-gray-600 mb-4 text-sm line-clamp-2">
+                    {product.description}
                   </p>
-                  <div className="flex justify-between items-center">
-                    <p className="text-[var(--primary-color)] font-bold text-xl">
+                  <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3">
+                    <p className="text-[var(--primary-color)] font-bold text-lg sm:text-xl">
                       {formatCurrency(product.price)}
                     </p>
-                    <div className="space-x-2">
+                    <div className="flex gap-2">
                       <button
                         onClick={() => navigate(`/products/${product.id}`)}
-                        className="px-2 py-2 bg-gray-200 text-gray-700 rounded hover:bg-gray-300 transition-colors"
+                        className="p-2 bg-gray-200 text-gray-700 rounded hover:bg-gray-300 transition-colors"
                         aria-label="View product details"
                       >
                         <svg
@@ -419,20 +416,19 @@ const ProductsPage = () => {
                       </button>
                       <button
                         onClick={() => addToCart(product)}
-                        className="px-4 py-2 bg-[var(--secondary-color)] text-white rounded hover:bg-[#162d4d] transition-colors"
+                        className="px-3 py-2 bg-[var(--secondary-color)] text-white rounded hover:bg-[#162d4d] transition-colors"
                       >
-                        Add to Cart{" "}
+                        Add to Cart
                       </button>
                     </div>
-                  </div>
-                </div>
+                  </div>                </div>
               </div>
             ))
           )}
         </div>
-      </div>
-    </PageContainer>
-  )
-}
+      </PageContainer>
+    </>
+  );
+};
 
 export default ProductsPage;

@@ -1,66 +1,98 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useOrders } from '../../Context/OrdersContextProvider';
-import LoadingSpinner from '../../Components/LoadingSpinner';
-import OrdersNavigation from './OrdersNavigation';
+import { useAuth } from "../../Context/AuthContextProvider"
+import LoadingSpinner from "../../Components/LoadingSpinner"
+import OrdersNavigation from "./OrdersNavigation"
+import PageContainer from "../../Components/PageContainer"
+import { formatCurrency } from "../../utils/razorpayLoader"
 
 const CartPage = () => {
-  const [loading, setLoading] = useState(true);
-  const navigate = useNavigate();
-  const { 
-    cart, 
-    updateQuantity, 
-    removeFromCart: removeItem, 
+  const [loading, setLoading] = useState(true)
+  const navigate = useNavigate()
+  const { userLoggedIn } = useAuth()
+  const {
+    cart,
+    updateQuantity,
+    removeFromCart: removeItem,
     getSubtotal,
-    clearCart
-  } = useOrders();
-  
+    clearCart,
+  } = useOrders()
+
   useEffect(() => {
     // Simulate loading delay
     setTimeout(() => {
-      setLoading(false);
-    }, 500);
-  }, []);
-  
+      setLoading(false)
+    }, 500)
+  }, [])
+
   const calculateTax = () => {
-    return getSubtotal() * 0.1;
-  };
-  
-  const calculateShipping = () => {
-    return 5.00;
-  };
-  
-  const calculateTotal = () => {
-    return getSubtotal() + calculateTax() + calculateShipping();
-  };
-  
-  const continueShopping = () => {
-    navigate('/products');
-  };
-  
-  const proceedToCheckout = () => {
-    navigate('/order-summary');
-  };
-    if (loading) {
-    return <LoadingSpinner fullScreen={true} message="Loading cart..." />;
+    return getSubtotal() * 0.1
   }
+
+  const calculateShipping = () => {
+    return 5.0
+  }
+
+  const calculateTotal = () => {
+    return getSubtotal() + calculateTax() + calculateShipping()
+  }
+
+  const continueShopping = () => {
+    navigate("/products")
+  }
+  const proceedToCheckout = () => {
+    // Check if user is logged in before proceeding to checkout
+    if (userLoggedIn) {
+      navigate("/order-summary")
+    } else {
+      // If not logged in, redirect to login page and store the intended destination
+      navigate("/login", { state: { from: "/order-summary" } })
+    }
+  }
+
+  if (loading) {
     return (
-    <div className="bg-gray-50 min-h-screen py-8">
+      <PageContainer>
+        <OrdersNavigation />
+        <LoadingSpinner fullScreen={true} message="Loading cart..." />
+      </PageContainer>
+    )
+  }
+  return (
+    <PageContainer>
       {/* Orders Navigation */}
       <OrdersNavigation />
-      
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 mt-6">
+
+      <div className="mt-6">
         <div className="bg-white rounded-lg shadow-lg p-6 md:p-8">
-          <h1 className="text-2xl md:text-3xl font-bold text-[var(--secondary-color)] mb-6">Your Shopping Cart</h1>
-          
+          <h1 className="text-2xl md:text-3xl font-bold text-[var(--secondary-color)] mb-6">
+            Your Shopping Cart
+          </h1>
+
           {cart.length === 0 ? (
             <div className="text-center py-12">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-16 w-16 mx-auto text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-16 w-16 mx-auto text-gray-400"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
+                />
               </svg>
-              <h2 className="mt-4 text-lg font-medium text-gray-700">Your cart is empty</h2>
-              <p className="mt-2 text-gray-500">Looks like you haven't added any products to your cart yet.</p>
-              <button 
+              <h2 className="mt-4 text-lg font-medium text-gray-700">
+                Your cart is empty
+              </h2>
+              <p className="mt-2 text-gray-500">
+                Looks like you haven't added any products to your cart yet.
+              </p>
+              <button
                 onClick={continueShopping}
                 className="mt-6 px-6 py-3 bg-[var(--primary-color)] text-[var(--secondary-color)] font-medium rounded-lg hover:bg-[#c99c4c] transition-colors"
               >
@@ -73,62 +105,91 @@ const CartPage = () => {
                 <table className="w-full">
                   <thead className="border-b border-gray-200">
                     <tr>
-                      <th className="py-3 text-left text-gray-500 text-sm uppercase tracking-wider">Product</th>
-                      <th className="py-3 text-center text-gray-500 text-sm uppercase tracking-wider">Quantity</th>
-                      <th className="py-3 text-right text-gray-500 text-sm uppercase tracking-wider">Price</th>
-                      <th className="py-3 text-right text-gray-500 text-sm uppercase tracking-wider">Total</th>
-                      <th className="py-3 text-right text-gray-500 text-sm uppercase tracking-wider">Actions</th>
+                      <th className="py-3 text-left text-gray-500 text-sm uppercase tracking-wider">
+                        Product
+                      </th>
+                      <th className="py-3 text-center text-gray-500 text-sm uppercase tracking-wider">
+                        Quantity
+                      </th>
+                      <th className="py-3 text-right text-gray-500 text-sm uppercase tracking-wider">
+                        Price
+                      </th>
+                      <th className="py-3 text-right text-gray-500 text-sm uppercase tracking-wider">
+                        Total
+                      </th>
+                      <th className="py-3 text-right text-gray-500 text-sm uppercase tracking-wider">
+                        Actions
+                      </th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-200">
-                    {cart.map(item => (
+                    {cart.map((item) => (
                       <tr key={item.id}>
                         <td className="py-4">
                           <div className="flex items-center">
-                            <img 
-                              src={item.imageUrl} 
-                              alt={item.name} 
+                            <img
+                              src={item.imageUrl}
+                              alt={item.name}
                               className="h-16 w-16 object-cover rounded"
                             />
                             <div className="ml-4">
-                              <h3 className="text-sm md:text-base font-medium text-gray-800">{item.name}</h3>
-                              <p className="text-xs md:text-sm text-gray-500 hidden sm:block">{item.description.substring(0, 60)}...</p>
+                              <h3 className="text-sm md:text-base font-medium text-gray-800">
+                                {item.name}
+                              </h3>
+                              <p className="text-xs md:text-sm text-gray-500 hidden sm:block">
+                                {item.description.substring(0, 60)}...
+                              </p>
                             </div>
                           </div>
                         </td>
                         <td className="py-4">
                           <div className="flex items-center justify-center">
-                            <button 
-                              onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                            <button
+                              onClick={() =>
+                                updateQuantity(item.id, item.quantity - 1)
+                              }
                               className="w-8 h-8 rounded-l bg-gray-200 text-gray-600 hover:bg-gray-300 flex items-center justify-center"
                             >
                               -
                             </button>
-                            <input 
-                              type="number" 
+                            <input
+                              type="number"
                               className="w-12 h-8 text-center border-t border-b border-gray-200 text-gray-800"
                               value={item.quantity}
                               readOnly
                             />
-                            <button 
-                              onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                            <button
+                              onClick={() =>
+                                updateQuantity(item.id, item.quantity + 1)
+                              }
                               className="w-8 h-8 rounded-r bg-gray-200 text-gray-600 hover:bg-gray-300 flex items-center justify-center"
                             >
                               +
                             </button>
                           </div>
                         </td>
-                        <td className="py-4 text-right text-sm md:text-base text-gray-800">${item.price.toFixed(2)}</td>
+                        <td className="py-4 text-right text-sm md:text-base text-gray-800">
+                          {formatCurrency(item.price)}
+                        </td>
                         <td className="py-4 text-right text-sm md:text-base font-medium text-gray-800">
-                          ${(item.price * item.quantity).toFixed(2)}
+                          {formatCurrency(item.price * item.quantity)}
                         </td>
                         <td className="py-4 text-right">
-                          <button 
+                          <button
                             onClick={() => removeItem(item.id)}
                             className="text-red-500 hover:text-red-700"
                           >
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                              <path fillRule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clipRule="evenodd" />
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              className="h-5 w-5"
+                              viewBox="0 0 20 20"
+                              fill="currentColor"
+                            >
+                              <path
+                                fillRule="evenodd"
+                                d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
+                                clipRule="evenodd"
+                              />
                             </svg>
                           </button>
                         </td>
@@ -137,37 +198,45 @@ const CartPage = () => {
                   </tbody>
                 </table>
               </div>
-            
+
               <div className="mt-8">
                 <div className="border-t border-gray-200 pt-6">
                   <div className="flex justify-between">
                     <p className="text-lg text-gray-600">Subtotal:</p>
-                    <p className="text-lg font-medium text-gray-800">${getSubtotal().toFixed(2)}</p>
+                    <p className="text-lg font-medium text-gray-800">
+                      {formatCurrency(getSubtotal())}
+                    </p>
                   </div>
                   <div className="flex justify-between mt-2">
-                    <p className="text-lg text-gray-600">Shipping:</p>
-                    <p className="text-lg font-medium text-gray-800">${calculateShipping().toFixed(2)}</p>
+                    <p className="text-lg text-gray-600">Shipping:</p>{" "}
+                    <p className="text-lg font-medium text-gray-800">
+                      {formatCurrency(calculateShipping())}
+                    </p>
                   </div>
                   <div className="flex justify-between mt-2">
-                    <p className="text-lg text-gray-600">Tax:</p>
-                    <p className="text-lg font-medium text-gray-800">${calculateTax().toFixed(2)}</p>
+                    <p className="text-lg text-gray-600">Tax:</p>{" "}
+                    <p className="text-lg font-medium text-gray-800">
+                      {formatCurrency(calculateTax())}
+                    </p>
                   </div>
                   <div className="flex justify-between mt-4 pt-4 border-t border-gray-200">
-                    <p className="text-xl font-bold text-[var(--secondary-color)]">Total:</p>
                     <p className="text-xl font-bold text-[var(--secondary-color)]">
-                      ${calculateTotal().toFixed(2)}
+                      Total:
+                    </p>{" "}
+                    <p className="text-xl font-bold text-[var(--secondary-color)]">
+                      {formatCurrency(calculateTotal())}
                     </p>
                   </div>
                 </div>
-                
+
                 <div className="flex flex-col sm:flex-row justify-between space-y-4 sm:space-y-0 sm:space-x-4 mt-8">
-                  <button 
+                  <button
                     onClick={continueShopping}
                     className="px-6 py-3 bg-gray-200 text-gray-700 font-medium rounded-lg hover:bg-gray-300 transition-colors"
                   >
                     Continue Shopping
                   </button>
-                  <button 
+                  <button
                     onClick={proceedToCheckout}
                     className="px-6 py-3 bg-[var(--primary-color)] text-[var(--secondary-color)] font-medium rounded-lg hover:bg-[#c99c4c] transition-colors"
                   >
@@ -177,10 +246,10 @@ const CartPage = () => {
               </div>
             </>
           )}
-        </div>
+        </div>{" "}
       </div>
-    </div>
-  );
-};
+    </PageContainer>
+  )
+}
 
 export default CartPage;

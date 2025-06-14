@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { Link, useNavigate } from "react-router-dom"
+import { useState, useEffect } from "react"
+import { Link, useNavigate, useLocation } from "react-router-dom"
 import AuthLayout from "../Components/AuthLayout"
 import { loginWithEmailAndPassword, signInWithGoogle } from "../Firebase/auth"
 
@@ -10,7 +10,10 @@ const LoginPage = () => {
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState("")
   const navigate = useNavigate()
+  const location = useLocation()
 
+  // Get redirect path from location state (if coming from protected route)
+  const redirectPath = location.state?.from || "/"
   const handleSubmit = async (e) => {
     e.preventDefault()
     setError("")
@@ -21,8 +24,8 @@ const LoginPage = () => {
       if (result.error) {
         setError(result.error)
       } else {
-        // Successful login, navigate to home page
-        navigate("/")
+        // Successful login, navigate to redirect path or home page
+        navigate(redirectPath)
       }
     } catch (err) {
       setError(err.message || "Failed to login. Please try again.")
@@ -30,7 +33,6 @@ const LoginPage = () => {
       setIsLoading(false)
     }
   }
-
   const handleGoogleSignIn = async () => {
     setError("")
     setIsLoading(true)
@@ -40,8 +42,8 @@ const LoginPage = () => {
       if (result.error) {
         setError(result.error)
       } else {
-        // Successful login, navigate to home page
-        navigate("/")
+        // Successful login, navigate to redirect path or home page
+        navigate(redirectPath)
       }
     } catch (err) {
       setError(err.message || "Failed to login with Google. Please try again.")
@@ -343,4 +345,4 @@ const LoginPage = () => {
   )
 }
 
-export default LoginPage;
+export default LoginPage

@@ -1,19 +1,23 @@
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Logo from './Logo';
+import PageContainer from "./PageContainer"
 
 const AuthLayout = ({ children, title, subtitle, linkText, linkPath }) => {
   // Set the page title
   useEffect(() => {
-    document.title = `${title} - SV Profiles`;
+    document.title = `${title} - SV Profiles`
     return () => {
-      document.title = 'SV Profiles';
-    };
-  }, [title]);
+      document.title = "SV Profiles"
+    }
+  }, [title])
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-gray-50 to-gray-100 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full space-y-8 bg-white p-8 sm:p-10 rounded-2xl shadow-xl border border-gray-100">
+    <PageContainer
+      className="flex flex-col items-center justify-center"
+      bgColor="bg-gradient-to-b from-gray-50 to-gray-100"
+    >
+      <div className="w-full max-w-md space-y-6 bg-white p-6 sm:p-10 rounded-2xl shadow-xl border border-gray-100 my-8 sm:my-12">
         <div>
           <div className="flex justify-center">
             <Logo className="h-16 w-auto" />
@@ -23,9 +27,9 @@ const AuthLayout = ({ children, title, subtitle, linkText, linkPath }) => {
           </h2>
           {subtitle && (
             <p className="mt-2 text-center text-sm text-gray-600">
-              {subtitle}{' '}
-              <Link 
-                to={linkPath} 
+              {subtitle}{" "}
+              <Link
+                to={linkPath}
                 className="font-medium text-[#dbac56] hover:text-[#c99b49] transition-colors duration-200"
               >
                 {linkText}
@@ -40,8 +44,8 @@ const AuthLayout = ({ children, title, subtitle, linkText, linkPath }) => {
           </p>
         </div>
       </div>
-    </div>
-  );
-};
+    </PageContainer>
+  )
+}
 
 export default AuthLayout;

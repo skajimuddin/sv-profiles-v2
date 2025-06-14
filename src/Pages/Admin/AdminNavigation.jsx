@@ -15,19 +15,20 @@ const AdminNavigation = () => {
   
   // Check if current path is active
   const isActive = (path) => {
-    if (path === '/admin' && location.pathname === '/admin') {
-      return true;
+    if (path === "/admin" && location.pathname === "/admin") {
+      return true
     }
-    return location.pathname.startsWith(path) && path !== '/admin';
-  };
-  
+    return location.pathname.startsWith(path) && path !== "/admin"
+  }
   return (
-    <nav className="bg-white border-b border-gray-200">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+    <nav className="bg-white border-b border-gray-200 mb-6 -mx-4 sm:-mx-6 lg:-mx-8">
+      <div className="px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           <div className="flex flex-1 overflow-x-auto hide-scrollbar">
             <div className="flex-shrink-0 flex items-center">
-              <span className="text-lg font-semibold text-[var(--secondary-color)]">Admin Panel</span>
+              <span className="text-lg font-semibold text-[var(--secondary-color)]">
+                Admin Panel
+              </span>
             </div>
             <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
               {navLinks.map((link) => (
@@ -36,19 +37,24 @@ const AdminNavigation = () => {
                   to={link.path}
                   className={`${
                     isActive(link.path)
-                      ? 'border-[var(--secondary-color)] text-gray-900'
-                      : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
+                      ? "border-[var(--secondary-color)] text-gray-900"
+                      : "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700"
                   } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
                   end={link.exact}
                 >
-                  <svg 
-                    xmlns="http://www.w3.org/2000/svg" 
-                    className="h-5 w-5 mr-1" 
-                    fill="none" 
-                    viewBox="0 0 24 24" 
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-5 w-5 mr-1"
+                    fill="none"
+                    viewBox="0 0 24 24"
                     stroke="currentColor"
                   >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={link.icon} />
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d={link.icon}
+                    />
                   </svg>
                   {link.label}
                 </NavLink>
@@ -61,20 +67,25 @@ const AdminNavigation = () => {
               className="text-gray-500 hover:text-gray-700 px-3 py-2 rounded-md text-sm font-medium flex items-center"
             >
               <span className="mr-1">View Store</span>
-              <svg 
-                xmlns="http://www.w3.org/2000/svg" 
-                className="h-4 w-4" 
-                fill="none" 
-                viewBox="0 0 24 24" 
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-4 w-4"
+                fill="none"
+                viewBox="0 0 24 24"
                 stroke="currentColor"
               >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                />
               </svg>
             </a>
           </div>
         </div>
       </div>
-      
+
       {/* Mobile navigation */}
       <div className="sm:hidden">
         <div className="flex overflow-x-auto py-2 px-3 space-x-4 hide-scrollbar">
@@ -84,19 +95,24 @@ const AdminNavigation = () => {
               to={link.path}
               className={`${
                 isActive(link.path)
-                  ? 'bg-[var(--secondary-color)] bg-opacity-10 text-[var(--secondary-color)]'
-                  : 'text-gray-600 hover:bg-gray-100'
+                  ? "bg-[var(--secondary-color)] bg-opacity-10 text-[var(--secondary-color)]"
+                  : "text-gray-600 hover:bg-gray-100"
               } flex items-center px-3 py-2 rounded-md text-sm font-medium whitespace-nowrap`}
               end={link.exact}
             >
-              <svg 
-                xmlns="http://www.w3.org/2000/svg" 
-                className="h-5 w-5 mr-1" 
-                fill="none" 
-                viewBox="0 0 24 24" 
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5 mr-1"
+                fill="none"
+                viewBox="0 0 24 24"
                 stroke="currentColor"
               >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={link.icon} />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d={link.icon}
+                />
               </svg>
               {link.label}
             </NavLink>
@@ -104,7 +120,7 @@ const AdminNavigation = () => {
         </div>
       </div>
     </nav>
-  );
+  )
 };
 
 export default AdminNavigation;
