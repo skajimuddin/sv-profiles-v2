@@ -11,6 +11,10 @@ import {
   prepareRazorpayOrder,
   formatCurrency,
 } from "../../utils/razorpayLoader"
+import {
+  createRazorpayOrder,
+  verifyRazorpayPayment,
+} from "../../utils/firebaseFunctions"
 
 const OrderSummaryPage = () => {
   const [loading, setLoading] = useState(true)
@@ -134,6 +138,7 @@ const OrderSummaryPage = () => {
     setErrors(newErrors)
     return Object.keys(newErrors).length === 0
   }
+  // Process order
   const handleSubmit = async (e) => {
     e.preventDefault()
 
@@ -144,9 +149,8 @@ const OrderSummaryPage = () => {
     setIsSubmitting(true)
     setErrors({})
 
-    // Process order
     try {
-      // Place the order using context function
+      // Prepare order data
       const orderData = {
         customer: {
           firstName: formData.firstName,
@@ -158,96 +162,88 @@ const OrderSummaryPage = () => {
           country: formData.country,
         },
         paymentMethod: formData.paymentMethod,
+        orderId: `order_${Date.now()}_${Math.random()
+          .toString(36)
+          .substring(2, 8)}`,
       }
-      // For Razorpay payment method, we'll handle payment differently
+
+      // For Razorpay payment method
       if (formData.paymentMethod === "razorpay") {
         try {
-          // Calculate the total amount
           const totalAmount = calculateTotal()
 
-          // Create a temporary order ID for tracking
-          const tempOrderId = `order_${Date.now()}_${Math.random()
-            .toString(36)
-            .substring(2, 8)}`
+          // Create Razorpay order using Firebase Function
+          const razorpayOrderId = await createRazorpayOrder(
+            orderData,
+            totalAmount
+          )
 
-          // Add the order ID to the order data
-          orderData.orderId = tempOrderId
+          // Prepare Razorpay options
+          const options = {
+            ...prepareRazorpayOrder(orderData, totalAmount),
+            order_id: razorpayOrderId,
+            handler: async function (response) {
+              try {
+                // Verify payment using Firebase Function
+                const verificationResult = await verifyRazorpayPayment({
+                  razorpay_order_id: response.razorpay_order_id,
+                  razorpay_payment_id: response.razorpay_payment_id,
+                  razorpay_signature: response.razorpay_signature,
+                  orderId: orderData.orderId,
+                })
 
-          // Create Razorpay options using our utility function
-          const options = prepareRazorpayOrder(orderData, totalAmount)
+                if (verificationResult.success) {
+                  // Payment verified, create order
+                  const order = await placeOrder({
+                    ...orderData,
+                    payment: {
+                      id: response.razorpay_payment_id,
+                      orderId: response.razorpay_order_id,
+                      signature: response.razorpay_signature,
+                      method: "razorpay",
+                      amount: totalAmount,
+                      currency: import.meta.env.VITE_CURRENCY || "INR",
+                      status: "completed",
+                    },
+                  })
 
-          // Add the handler for payment success
-          options.handler = async function (response) {
-            try {
-              // Payment was successful, include payment ID with order data
-              const orderWithPayment = {
-                ...orderData,
-                payment: {
-                  id: response.razorpay_payment_id,
-                  method: "razorpay",
-                  amount: totalAmount,
-                  currency: import.meta.env.VITE_CURRENCY || "INR",
-                  status: "completed",
-                  timestamp: new Date().toISOString(),
-                },
+                  setOrderId(order.id)
+                  setOrderComplete(true)
+                  clearCart()
+                }
+              } catch (error) {
+                console.error("Payment verification error:", error)
+                setErrors({
+                  submitError:
+                    "Payment verification failed. Please contact support.",
+                })
               }
-
-              // Now place the order with payment information
-              const order = await placeOrder(orderWithPayment)
-              setOrderId(order.id || tempOrderId)
-
-              // Set order as complete
-              setOrderComplete(true)
-
-              // Show success toast or notification here if you have one
-              console.log("Payment successful!", response)
-            } catch (error) {
-              console.error("Error saving order after payment:", error)
-              setErrors({
-                submitError:
-                  "Payment was successful but there was an issue saving your order. Please contact support with your payment ID: " +
-                  response.razorpay_payment_id,
-              })
-            }
+            },
           }
 
-          // Initialize Razorpay
+          // Initialize payment
           await makeRazorpayPayment(options)
-
-          // The handler function will take care of completing the order
-          setIsSubmitting(false)
         } catch (error) {
-          console.error("Razorpay payment error:", error)
+          console.error("Razorpay error:", error)
           setErrors({
-            submitError:
-              error.message ||
-              "Payment failed. Please try again or choose a different payment method.",
+            submitError: error.message || "Payment failed. Please try again.",
           })
-          setIsSubmitting(false)
         }
       } else {
-        // For other payment methods, continue with the original flow
+        // For other payment methods
         const order = await placeOrder(orderData)
         setOrderId(order.id)
-
-        // Clear cart (redundant as placeOrder already does this, but keeping for clarity)
-        clearCart()
-
-        // Set order as complete
         setOrderComplete(true)
-        setIsSubmitting(false)
+        clearCart()
       }
     } catch (error) {
       console.error("Error processing order:", error)
-
-      // Display user-friendly error
       setErrors({
         submitError:
-          error.message ||
-          "There was an error processing your order. Please try again.",
+          error.message || "Error processing order. Please try again.",
       })
-
       window.scrollTo({ top: 0, behavior: "smooth" })
+    } finally {
       setIsSubmitting(false)
     }
   }

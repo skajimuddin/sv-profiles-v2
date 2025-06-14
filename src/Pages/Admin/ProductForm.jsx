@@ -2,17 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useAuth } from '../../Context/AuthContextProvider';
 import { useFeedback } from '../../Context/FeedbackContext';
-import AdminNavigation from './AdminNavigation';
-import LoadingSpinner from '../../Components/LoadingSpinner';
-import ErrorDisplay from '../../Components/ErrorDisplay';
+import { useAdmin } from "../../Context/AdminContextProvider"
+import AdminNavigation from "./AdminNavigation"
+import LoadingSpinner from "../../Components/LoadingSpinner"
+import ErrorDisplay from "../../Components/ErrorDisplay"
 import PageContainer from "../../Components/PageContainer"
 import { collection, getDocs, query } from "firebase/firestore"
 import { db } from "../../Firebase/firebase"
-import {
-  addProduct,
-  updateProduct,
-  getProductById,
-} from "../../Firebase/productService"
 
 const ProductForm = () => {
   const { productId } = useParams()
@@ -43,6 +39,7 @@ const ProductForm = () => {
   const navigate = useNavigate()
   const { currentUser, userDetails } = useAuth()
   const feedback = useFeedback()
+  const { createProduct, updateProduct } = useAdmin()
 
   // Check if user is admin
   useEffect(() => {
@@ -215,52 +212,35 @@ const ProductForm = () => {
   // Submit the form
   const handleSubmit = async (e) => {
     e.preventDefault()
-
-    // Basic validation
-    if (
-      !formData.name.trim() ||
-      !formData.description.trim() ||
-      !formData.price ||
-      !formData.category.trim()
-    ) {
-      feedback.showError("Please fill all required fields")
-      return
-    }
+    setSubmitLoading(true)
+    setError(null)
 
     try {
-      setSubmitLoading(true)
-
-      // Create product object
       const productData = {
-        name: formData.name.trim(),
-        description: formData.description.trim(),
+        name: formData.name,
+        description: formData.description,
         price: parseFloat(formData.price),
-        category: formData.category.trim(),
-        stockQuantity: parseInt(formData.stockQuantity, 10) || 100,
-        features: formData.features,
-        specs: formData.specs,
+        category: formData.category,
+        imageUrl: formData.imageUrl,
+        features: formData.features.filter((f) => f.trim()),
+        specs: formData.specs.reduce((acc, spec) => {
+          if (spec.key && spec.value) {
+            acc[spec.key] = spec.value
+          }
+          return acc
+        }, {}),
       }
 
-      if (isEditMode) {
-        // If we already have an image URL and no new file, keep the existing URL
-        if (formData.imageUrl && !imageFile) {
-          productData.imageUrl = formData.imageUrl
-        }
-
-        // Update existing product
-        await updateProduct(productId, productData, imageFile)
-        feedback.showSuccess("Product updated successfully")
+      if (isEditMode && productId) {
+        await updateProduct(productId, productData)
       } else {
-        // Create new product
-        await addProduct(productData, imageFile)
-        feedback.showSuccess("Product created successfully")
+        await createProduct(productData)
       }
 
-      // Redirect to products list
       navigate("/admin/products")
     } catch (error) {
       console.error("Error saving product:", error)
-      feedback.showError(`Failed to save product: ${error.message}`)
+      setError(error.message || "Error saving product")
     } finally {
       setSubmitLoading(false)
     }

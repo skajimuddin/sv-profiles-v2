@@ -1,12 +1,6 @@
 /**
  * Razorpay Integration Utility
- * Provides functions for loading the Razorpay SDK, processing payments,
- * and verifying payment signatures.
- */
-
-/**
- * Dynamically loads the Razorpay script to avoid issues with SSR and improve page load performance
- * @returns {Promise} A promise that resolves when Razorpay is loaded
+ * Provides helper functions for Razorpay integration
  */
 export const loadRazorpay = () => {
   return new Promise((resolve) => {
@@ -41,7 +35,7 @@ export const makeRazorpayPayment = (options) => {
       const res = await loadRazorpay();
       
       if (!res) {
-        reject(new Error('Razorpay SDK failed to load. Check your internet connection.'));
+        reject(new Error('Failed to load Razorpay SDK'));
         return;
       }
       
@@ -49,17 +43,16 @@ export const makeRazorpayPayment = (options) => {
       if (!options.theme || !options.theme.color) {
         options.theme = {
           ...options.theme,
-          color: import.meta.env.VITE_RAZORPAY_THEME_COLOR || "#D4AF37"
+          color: import.meta.env.VITE_RAZORPAY_THEME_COLOR || '#D4AF37'
         };
-      }
-      
-      const rzp = new window.Razorpay(options);
+      } const rzp = new window.Razorpay(options);
       
       rzp.on('payment.success', function (response) {
         resolve(response);
       });
       
       rzp.on('payment.error', function (error) {
+        console.error('Razorpay payment error:', error);
         reject(error);
       });
       
@@ -67,7 +60,7 @@ export const makeRazorpayPayment = (options) => {
       rzp.open();
     } catch (error) {
       console.error('Error initializing Razorpay:', error);
-      reject(new Error('Failed to initialize payment. Please try again later.'));
+      reject(error);
     }
   });
 };

@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../Context/AuthContextProvider';
-import AdminNavigation from './AdminNavigation';
-import LoadingSpinner from '../../Components/LoadingSpinner';
-import ErrorDisplay from '../../Components/ErrorDisplay';
+import { useAdmin } from "../../Context/AdminContextProvider"
+import AdminNavigation from "./AdminNavigation"
+import LoadingSpinner from "../../Components/LoadingSpinner"
+import ErrorDisplay from "../../Components/ErrorDisplay"
 import PageContainer from "../../Components/PageContainer"
 import { getOrderStats } from "../../Firebase/orderService"
 import { getProductCount } from "../../Firebase/productService"
 import { getUserStats } from "../../Firebase/adminService"
 
 const AdminDashboard = () => {
+  const [isAdmin, setIsAdmin] = useState(false)
   const [loading, setLoading] = useState(true)
   const [stats, setStats] = useState({
     totalOrders: 0,
@@ -25,24 +27,29 @@ const AdminDashboard = () => {
 
   const navigate = useNavigate()
   const { currentUser, userDetails } = useAuth()
+  const { checkAdminStatus } = useAdmin()
 
   // Check if user is admin
   useEffect(() => {
-    const checkAdminStatus = async () => {
-      if (!currentUser) {
-        navigate("/login")
-        return
-      }
-
-      // Check if user has admin role
-      if (!userDetails?.roles?.includes("admin")) {
+    const verifyAdmin = async () => {
+      try {
+        const adminStatus = await checkAdminStatus()
+        if (!adminStatus) {
+          navigate("/")
+          return
+        }
+        setIsAdmin(true)
+      } catch (error) {
+        console.error("Error verifying admin status:", error)
         navigate("/")
-        return
+      } finally {
+        setLoading(false)
       }
     }
 
-    checkAdminStatus()
-  }, [currentUser, userDetails, navigate])
+    verifyAdmin()
+  }, [checkAdminStatus, navigate])
+
   // Fetch dashboard statistics
   useEffect(() => {
     const fetchStats = async () => {
@@ -82,9 +89,13 @@ const AdminDashboard = () => {
   if (loading) {
     return (
       <PageContainer>
-        <LoadingSpinner fullScreen message="Loading dashboard..." />
+        <LoadingSpinner fullScreen={true} message="Verifying admin access..." />
       </PageContainer>
     )
+  }
+
+  if (!isAdmin) {
+    return null // Will redirect in useEffect
   }
 
   return (

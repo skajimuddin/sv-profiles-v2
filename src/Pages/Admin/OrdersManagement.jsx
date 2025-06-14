@@ -1,16 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../../Context/AuthContextProvider';
-import AdminNavigation from './AdminNavigation';
-import LoadingSpinner from '../../Components/LoadingSpinner';
-import ErrorDisplay from '../../Components/ErrorDisplay';
-import { useFeedback } from '../../Context/FeedbackContext';
+import { useAdmin } from "../../Context/AdminContextProvider"
+import AdminNavigation from "./AdminNavigation"
+import LoadingSpinner from "../../Components/LoadingSpinner"
+import ErrorDisplay from "../../Components/ErrorDisplay"
+import { useFeedback } from "../../Context/FeedbackContext"
 import PageContainer from "../../Components/PageContainer"
-import {
-  getOrders,
-  updateOrderStatus as updateOrderStatusService,
-  addOrderNote,
-} from "../../Firebase/orderService"
+import { getOrders } from "../../Firebase/orderService"
 
 const ORDER_STATUSES = {
   pending: { label: "Pending", color: "bg-yellow-100 text-yellow-800" },
@@ -33,9 +30,11 @@ const OrdersManagement = () => {
   const [newNote, setNewNote] = useState("")
   const [error, setError] = useState(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [updateLoading, setUpdateLoading] = useState(null)
 
   const navigate = useNavigate()
   const { currentUser, userDetails } = useAuth()
+  const { updateOrderStatus } = useAdmin()
   const feedback = useFeedback()
 
   const ORDERS_PER_PAGE = 10
@@ -147,46 +146,15 @@ const OrdersManagement = () => {
   // Update order status
   const handleStatusUpdate = async (orderId, status) => {
     try {
-      setIsUpdating(true)
-
-      await updateOrderStatusService(orderId, status, newNote)
-
-      // Update the local order state
-      setOrders((prevOrders) =>
-        prevOrders.map((order) => {
-          if (order.id === orderId) {
-            return {
-              ...order,
-              status,
-              statusHistory: [
-                ...(order.statusHistory || []),
-                {
-                  status,
-                  timestamp: new Date(),
-                  note: newNote || "",
-                  updatedBy: currentUser.email,
-                },
-              ],
-            }
-          }
-          return order
-        })
-      )
-
-      feedback.showSuccess(
-        `Order ${orderId} status updated to ${ORDER_STATUSES[status].label}`
-      )
-
-      // Close modal
-      setIsModalOpen(false)
-      setNewNote("")
-      setSelectedOrder(null)
+      setUpdateLoading(orderId)
+      await updateOrderStatus(orderId, status)
+      // Refresh orders list
+      fetchOrders()
     } catch (error) {
       console.error("Error updating order status:", error)
-      feedback.showError("Failed to update order status")
-      setError(error)
+      setError("Failed to update order status")
     } finally {
-      setIsUpdating(false)
+      setUpdateLoading(null)
     }
   }
 
